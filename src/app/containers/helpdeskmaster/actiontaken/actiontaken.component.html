@@ -1,0 +1,159 @@
+<h5 class="m-b-10 ng-star-inserted">
+    {{'helpdesk.actiontaken' | translate}}
+    <button type="submit" class="btn btn-success pull-right custom_add_button"
+        routerLink='/helpdeskmaster/actiontaken/add'>
+        <i class="feather icon-plus mr-2"></i>
+        {{'helpdesk.addactiontaken' | translate}}
+    </button>
+</h5>
+
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdesk' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:"> {{'helpdesk.actiontaken' | translate}}</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.list' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <form [formGroup]="searchForm" autocomplete="off" (ngSubmit)="search(searchForm)" #formDirective="ngForm">
+            <app-card cardTitle="{{'helpdesk.search' | translate}}" class="search-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.category' | translate}} </label>
+                            <select class="form-control" name="category" formControlName="category" autocomplete="off"
+                                (change)="getsub()">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of cat" value="{{data.id}}">{{data.categoryName}}</option>
+                            </select>
+                            <div *ngIf="f.category.invalid && (f.category.dirty || f.category.touched || formSubmitted)"
+                                class="error-msg">
+                                <div *ngIf="f.category.hasError('required')">
+                                    <i class="fa fa-times-circle-o"></i> {{'helpdesk.category' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.subcategory' | translate}}</label>
+                            <select class="form-control" name="subcategory" formControlName="subcategory"
+                                autocomplete="off" (change)="getActualProblem()">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of sub" value="{{data.id}}">{{data.subcategoryName}}
+                                </option>
+                            </select>
+                            <div *ngIf="f.subcategory.invalid && (f.subcategory.dirty || f.subcategory.touched || formSubmitted)"
+                                class="error-msg">
+                                <div *ngIf="f.subcategory.hasError('required')">
+                                    <i class="fa fa-times-circle-o"></i> {{'helpdesk.subcategory' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.actualproblem' | translate}} </label>
+                            <select class="form-control" name="actualproblem" formControlName="actualProblemId"
+                                autocomplete="off" (change)="getActiveActionTakenList()">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let item of problem" value="{{item.id}}">{{item.actualProblem}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && searchForm.get('actualProblemId').errors || searchForm.get('actualProblemId').touched "
+                                class="error-msg">
+                                <span *ngIf="searchForm.get('actualProblemId').errors?.required">
+                                    {{'helpdesk.actualproblem' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.actiontaken' | translate}} </label>
+                            <select class="form-control " name="actionTaken" formControlName="actionTaken"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of dropdown" style="position: absolute;"
+                                    value="{{data.actionTaken}}">{{data.actionTaken}}
+                                </option>
+                            </select>
+                            <div *ngIf="f.actionTaken.invalid && (f.actionTaken.dirty || f.actionTaken.touched || formSubmitted)"
+                                class="error-msg">
+                                <div *ngIf="f.actionTaken.hasError('required')">
+                                    <i class="fa fa-times-circle-o"></i> {{'helpdesk.actiontaken' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 text-right mb-4">
+
+                        <button type="submit" class="btn btn-primary mr-2">{{'helpdesk.search' | translate}}</button>
+                        <button type="button" class="btn btn-secondary" (click)="clearfilter()">{{'helpdesk.cancel' | translate}}</button>
+
+                    </div>
+                </div>
+            </app-card>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="{{'helpdesk.actiontakendetails' | translate}}" blockClass="table-border-style" class="list-panel">
+            <div class="table-responsive">
+                <table class="table table-bordered" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>{{'helpdesk.sNo' | translate}}</th>
+                            <th>{{'helpdesk.actiontaken' | translate}}</th>
+                            <th>{{'helpdesk.category' | translate}}</th>
+                            <th>{{'helpdesk.subcategory' | translate}}</th>
+                            <th>{{'helpdesk.createdby' | translate}}</th>
+                            <th>{{'helpdesk.createdon' | translate}}</th>
+                            <th>{{'helpdesk.Modifiedby' | translate}}</th>
+                            <th>{{'helpdesk.Modifiedon' | translate}}</th>
+                            <th>{{'helpdesk.status' | translate}}</th>
+                            <th>{{'helpdesk.action' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="list?.length != 0">
+                        <tr *ngFor="let data of list;let i=index">
+                            <td>
+                                {{i+1}}
+                            </td>
+
+                            <td>{{data.actionTaken}}</td>
+                            <td>{{data.categoryName}}</td>
+                            <td>{{data.subcategoryName}}</td>
+                            <td>{{data.createdBy}}</td>
+                            <td>{{data.createdDate | date:'dd-MM-yyyy HH:mm:ss'}} </td>
+                            <td>{{data.modifiedBy}}</td>
+                            <td>{{data.modifiedDate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+
+                            <td>
+                                <span class="badge m-r-5 badge-light-success" *ngIf="data.active">Active</span>
+                                <span class="badge m-r-5 badge-light-danger" *ngIf="data.active == false">Inactive</span>
+                            </td>
+                            <td class="table-action-column text-center">
+                                <button class="btn btn-icon btn-primary mr-2" type="button"
+                                    (click)="navigateView(data.id)">
+                                    <i class="feather icon-eye"></i></button>
+                                <button class="btn btn-icon btn-secondary mr-2" type="button"
+                                    (click)="navigateEdit(data.id)">
+                                    <i class="feather icon-edit"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 mt-2">
+                    <button *ngIf="list?.length != 0 && list?.length != undefined " class="btn btn-success"
+                        type="button" (click)="export()">{{'helpdesk.download' | translate}}</button>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

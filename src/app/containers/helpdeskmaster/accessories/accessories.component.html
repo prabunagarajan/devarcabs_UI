@@ -1,0 +1,110 @@
+<h5 class="m-b-10 ng-star-inserted">
+    {{'helpdesk.accessories' | translate}}
+    <button type="submit" class="btn btn-success pull-right custom_add_button"
+        routerLink='/helpdeskmaster/accessories/add'>
+        <i class="feather icon-plus mr-2"></i>
+        {{'helpdesk.addaccessories' | translate}}
+    </button>
+</h5>
+
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:"> {{'helpdesk.helpdesk' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.accessories' | translate}}</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.list' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <!-- <form [formGroup]="createForm" autocomplete="off"> -->
+        <app-card cardTitle="{{'helpdesk.search' | translate}}" class="search-panel">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>{{'helpdesk.accessories' | translate}}</label>
+                        <select class="form-control" name="accessoriesName" #accessoriesName="ngModel"
+                            [(ngModel)]="searchList['accessoriesName']" autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option *ngFor="let data of accessoriesdropdown" value="{{data.accessoriesName}}">
+                                {{data.accessoriesName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name="status" #status="ngModel" [(ngModel)]="searchList['status']" autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option value="true">Active</option>
+                                <option value="false">InActive</option>
+                            </select>
+                        </div>
+                    </div> -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-4">
+                    <button type="submit" class="btn btn-primary mr-2" (click)="search()">{{'helpdesk.search' | translate}}</button>
+                    <button type="submit" class="btn btn-secondary" (click)="clear()">{{'helpdesk.clear' | translate}}</button>
+                </div>
+            </div>
+
+        </app-card>
+        <!-- </form> -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="{{'helpdesk.Searchaccessoriesdetails' | translate}}" blockClass="table-border-style" class="list-panel">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center text-center" datatable [dtOptions]="dtOptions"
+                    [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>{{'helpdesk.sNo' | translate}}</th>
+                            <th>{{'helpdesk.accessoriescode' | translate}}</th>
+                            <th>{{'helpdesk.accessoriesname' | translate}}</th>
+                            <th>{{'helpdesk.createdby' | translate}}</th>
+                            <th>{{'helpdesk.createdon' | translate}}</th>
+                            <th>{{'helpdesk.Modifiedby' | translate}}</th>
+                            <th>{{'helpdesk.Modifiedon' | translate}}</th>
+                            <th>{{'helpdesk.status' | translate}}</th>
+                            <th>{{'helpdesk.action' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="list?.length != 0">
+                        <tr *ngFor="let data of list;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{data.accessoriesCode}}</td>
+                            <td>{{data.accessoriesName}}</td>
+                            <td>{{data.created_by}}</td>
+                            <td> {{data.created_date |date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>{{data.modified_by}}</td>
+                            <td>{{data.modified_date |date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                            <td>
+                                <span class="badge m-r-5 badge-light-success" *ngIf="data.status==true">Active</span>
+                                <span class="badge m-r-5 badge-light-danger" *ngIf="data.status==false">Inactive</span>
+                            </td>
+                            <td class="table-action-column text-center">
+                                <button class="btn btn-icon btn-primary mr-2" type="button"
+                                    (click)="viewaccessories(data.id);">
+                                    <i class="feather icon-eye"></i></button>
+
+                                <button class="btn btn-icon btn-secondary mr-2" type="button"
+                                    (click)="editaccessories(data.id);">
+                                    <i class="feather icon-edit"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 mt-2">
+                    <div ngbDropdown>
+                        <button *ngIf="list?.length != 0 && list?.length != undefined " class="btn btn-success"
+                        type="button" (click)="export()">{{'helpdesk.download' | translate}}</button>
+
+                    </div>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

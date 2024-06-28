@@ -1,0 +1,75 @@
+<ul class="navbar-nav ml-auto" >
+  <li>
+    <!-- <div class="dropdown" ngbDropdown placement="auto" [hidden]="!header" >
+      <a ngbDropdownToggle href="javascript:" data-toggle="dropdown" class="nofi-bell" (click)="changeIsAllRead()" [hidden]="!header">
+        <i class="icon feather icon-bell"></i>
+        <div class="noti-bell-bg" *ngIf="newMsgCount > 0">
+          <p class="text-center" >{{newMsgCount}}</p>
+        </div>
+      </a>
+      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right notification" >
+        <div class="noti-head">
+          <h6 class="d-inline-block m-b-0">Notifications</h6>
+        </div>
+        <ul class="noti-body">
+          <ng-container>
+            <li class="notification border-bottom" *ngFor="let notification of notificationEarlierList; index as i">
+              <div class="media">
+                <div class="media-body">
+                <p>
+                  <strong>{{notification?.title}}</strong>
+                  <span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>{{notification?.createdDate | timeAgo}}</span>
+                </p>
+                <p>{{notification?.body}}</p>
+                </div>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+        <div class="noti-footer">
+          <a routerLink="/notification">show all</a>
+        </div>
+      </div>
+    </div> -->
+  </li>
+  <app-select-language  [hidden]="!header" ></app-select-language>
+  <li>
+    <div class="dropdown drp-user" ngbDropdown placement="auto" [hidden]="!header"> 
+      <a href="javascript:" ngbDropdownToggle data-toggle="dropdown">
+        <i class="icon feather icon-user"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right profile-notification" ngbDropdownMenu>
+        <div class="pro-head">
+          <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+          <span>{{username}}</span>
+        </div>
+        <ul class="last-login">
+          <li><span class="text-muted">Last Login</span><br /><i class="feather icon-clock mr-2"></i>{{this.dateTime}}
+          </li>
+        </ul>
+        <ul class="pro-body py-0">
+          <hr class="mb-0">
+          <li class="m-0"><a href="javascript:" routerLink="/helpdesk/view-profile" class="dropdown-item"><i
+                class="feather icon-user"></i> {{'helpdesk.profile' | translate}}</a></li>
+          <li class="m-0"><a href="javascript:" class="dropdown-item" data-toggle="modal"
+              (click)="onLogoutClick()"><i class="feather icon-log-out"></i> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<app-ui-modal #loginOutPopup dialogClass="modal-dialog-centered">
+  <div class="app-modal-header">
+    <h5 class="modal-title">{{'helpdesk.confirmation' | translate}}</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+      (click)="onLogoutPopClose()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="app-modal-body">
+    <h6 class="text-secondary text-center">Are you sure you want to logout?</h6>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onLogout()">{{'helpdesk.yes' | translate}}</button>
+    <button type="button" class="btn btn-secondary ml-2" data-dismiss="modal" (click)="onLogoutPopClose()">{{'helpdesk.no' | translate}}</button>
+  </div>
+</app-ui-modal>

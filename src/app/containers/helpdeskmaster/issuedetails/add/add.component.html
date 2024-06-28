@@ -1,0 +1,130 @@
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId ==''">
+    {{'helpdesk.addissuedetails' | translate}}
+</h5>
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId !=''">
+    {{'helpdesk.editissuedetails' | translate}}
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:"> {{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:"> {{'helpdesk.issuedetails' | translate}}</a></li>
+    <li *ngIf="editId" class="breadcrumb-item"><a href="javascript:"></a> {{'helpdesk.edit' | translate}}</li>
+    <li *ngIf="editId == undefined" class="breadcrumb-item"><a href="javascript:"></a>{{'helpdesk.add' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <form [formGroup]="createForm" autocomplete="off">
+            <app-card cardTitle=" {{'helpdesk.issuedetails' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.issuedetailscode' | translate}}</label>
+                            <input type="text" class="form-control" readonly placeholder="WC1122"
+                                formControlName="faqCode" name="faqCode">
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.issuedetails' | translate}}<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder=" {{'helpdesk.issuedetails' | translate}}"
+                                formControlName="issue" required>
+                            <div *ngIf="formSubmitted && createForm.get('issue').errors || createForm.get('issue').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('issue').errors?.required">
+                                    {{'helpdesk.issuedetails' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.category' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="category" required (change)="getservice()">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of dropdowngetcatogry" value="{{data.id}}">
+                                    {{data.categoryName}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('category').errors || createForm.get('category').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('category').errors?.required">
+                                    {{'helpdesk.category' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.subcategory' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="subCategory" required>
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of dropdown" value="{{data.id}}">{{data.subcategoryName}}
+                                </option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('subCategory').errors || createForm.get('subCategory').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('subCategory').errors?.required">
+                                    {{'helpdesk.subcategory' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.issuetype' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="isIssuetype" required name="isIssuetype">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option value="true">Software </option>
+                                <option value="false">Hardware</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('isIssuetype').errors || createForm.get('isIssuetype').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('isIssuetype').errors?.required">
+                                    {{'helpdesk.issuetype' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.status' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="status" required name="status">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option value="true">Active</option>
+                                <option value="false">InActive</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('status').errors || createForm.get('status').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('status').errors?.required">
+                                    {{'helpdesk.status' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </app-card>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary m-r-5"
+                        (click)="addRegistration(createForm)"> {{'helpdesk.submit' | translate}}</button>
+                    <button class="btn btn-secondary" routerLink="/helpdeskmaster/issuedetails/list"> {{'helpdesk.cancel' | translate}}</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-ui-modal #exampleModalCenter dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success"> {{'helpdesk.appsubmitsuccess' | translate}}</h3>
+        <!-- <h6>Your Application Number is <span class="badge badge-light-success">WH45628665456</span></h6> -->
+    </div>
+</app-ui-modal>

@@ -1,0 +1,31 @@
+<h5 class="m-b-10 ng-star-inserted" *ngIf="titleSection">
+    {{ titleSection.title | translate }}
+    <ng-container *ngIf="titleSection.button !== undefined">
+        <button type="submit" class="btn btn-success pull-right custom_add_button" [routerLink]="[titleSection.button.url]">
+            <i class="feather icon-plus mr-2"></i>
+            {{ titleSection.button.text | translate }}
+        </button>
+    </ng-container>
+</h5>
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <ng-container *ngIf="breadcrumbs?.length > 0" >
+        <ng-container *ngFor="let breadcrumb of breadcrumbs;">
+            <li class="breadcrumb-item" *ngIf="breadcrumb.hasHref == true">
+                <a [routerLink]="[breadcrumb.url]">
+                    {{ breadcrumb.text | translate }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" *ngIf="breadcrumb.hasHref == false">
+                {{ breadcrumb.text | translate }}
+            </li>
+        </ng-container>
+    </ng-container>
+    <li class="breadcrumb-item active">
+        {{ text | translate }}
+    </li>
+    <!-- <li class="breadcrumb-item"><a href="javascript:">{{ 'master.common.masters' | translate }} </a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{ 'master.common.location' | translate }} </a></li>
+    <li class="breadcrumb-item active" aria-current="page" >{{ 'master.common.list' | translate }} </li> -->
+</ul>

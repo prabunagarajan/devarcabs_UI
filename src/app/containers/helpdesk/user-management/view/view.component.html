@@ -1,0 +1,411 @@
+<h5 class="m-b-10 ng-star-inserted">{{'helpdesk.viewhelpdeskusermanagement' | translate}} </h5>
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdesk' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskusermanagement' | translate}}</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.view' | translate}}</li>
+</ul>
+
+
+<div class="row mb-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <form autocomplete="off">
+            <app-card cardTitle="{{'helpdesk.viewuserdetails' | translate}}" class="list-panel view-panel">
+                <div class="row mb-2 pb-2">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.salutation' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.salutationValue}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.firstname' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.firstName}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.middlename' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.middleName}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.lastname' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.lastName}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.username' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.username}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.address' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.address}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.dateofjoining' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.dateOfJoining}}</span>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.emailid' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.emailId}}</span>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.mobileno' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.phoneNumber}}</span>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.employeeid' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.employeeId}}</span>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.employmentstatus' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.employmentStatus}}</span>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.role' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.roleName}}</span>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.designation' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.designationValue}}</span>
+                    </div>
+                </div>
+            </app-card>
+        </form>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <form autocomplete="off">
+            <app-card cardTitle="{{'helpdesk.shiftconfiguration' | translate}}" class="list-panel view-panel">
+                <div class="row mb-2 pb-2">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.daterange' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.shiftConfigurationResponseDTO.startDate }} - {{
+                            usermanagementlist?.shiftConfigurationResponseDTO.endDate}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.shiftconfiguration' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.shiftConfigurationResponseDTO.shiftConfigResponseDTO.configuration}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.shiftworkingdays' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{usermanagementlist?.shiftConfigurationResponseDTO.shiftWorkingDaysResponseDTO.workingdays}}</span>
+                    </div>
+                </div>
+            </app-card>
+        </form>
+    </div>
+    <div class="col-xl-12">
+        <app-card cardTitle="Grievance  Assign Field List" class="list-panel add-panel"
+            *ngIf="role=='Handling Officer'">
+
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="table-responsive text-center">
+
+                        <div class="example-table-container">
+                            <table mat-table [dataSource]="dataSourceAssignList" matSort class="example-table">
+                                <ng-container matColumnDef="position">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        {{'helpdesk.sNo' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row;let i = index">
+                                        {{i
+                                        +(paginator.pageIndex *
+                                        paginator.pageSize) +
+                                        1}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="username">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.username' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        {{row.username}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="employeeId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'helpdesk.employeeid' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        {{row.employeeId}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="emailId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.emailid' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        {{row.emailId}}
+                                    </td>
+                                </ng-container>
+
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsAssignlist">
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsAssignlist;"
+                                    [style.cursor]="'pointer'">
+                                </tr>
+                            </table>
+                            <mat-error *ngIf="dataSourceAssignList.filteredData.length == 0" class="text-center"
+                                style="font-size: 20px;">
+                                <b>
+                                    <span>No Records Found
+                                    </span>
+                                </b>
+                            </mat-error>
+                        </div>
+
+                        <mat-paginator class="mat-paginator-sticky" [length]="dataSourceAssignList.filteredData.length"
+                            [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
+            </div>
+
+        </app-card>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <form autocomplete="off">
+            <app-card cardTitle="{{'helpdesk.usermanagementdetails' | translate}}" blockClass="table-border-style"
+                class="list-panel stockavailability_tab">
+
+                <ngb-tabset type="pills" #tabset="ngbTabset" (tabChange)="beforeChange($event)">
+                    <ngb-tab title="{{'helpdesk.assetdetails' | translate}}" id="AD" class="mb-3">
+                        <ng-template ngbTabContent>
+
+                            <div class="">
+                                <div class="table-responsive">
+                                    <table class=" mt-4 table table-bordered text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>{{'helpdesk.sNo' | translate}}</th>
+                                                <th>{{'helpdesk.deviceserialnumber' | translate}}</th>
+                                                <th>{{'helpdesk.devicemodel' | translate}}</th>
+                                                <th>{{'helpdesk.devicetype' | translate}}</th>
+                                                <th>{{'helpdesk.dateofreceiving' | translate}}</th>
+                                                <th>{{'helpdesk.dateofdeployment' | translate}}</th>
+                                                <th>{{'helpdesk.location' | translate}}</th>
+                                                <th>{{'helpdesk.status' | translate}}</th>
+                                                <th>{{'helpdesk.action' | translate}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- <tr>
+                                            <td>1</td>
+                                            <td>Sl1122</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>20-Jul-2021</td>
+                                            <td>20-Jul-2021</td>
+                                            <td>Lucknow</td>
+                
+                                            <td>
+                                                <span class="badge m-r-5 badge-light-success">Active</span>
+                                            </td>
+                                            <td class="table-action-column">
+                                                <button class="btn btn-icon btn-danger" type="button"
+                                                    >
+                                                    <i class="fas fa-trash-alt text-white"></i></button>
+                                            </td>
+                                        </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                                        <div class="row mb-2 pb-2">
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                                                <label class="w-100 view-label">{{'helpdesk.remarks' | translate}}<span
+                                                        class="float-right">:</span></label>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                                                <span>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="{{'helpdesk.remarks' | translate}}">
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 text-right">
+                                    <button type="button" class="btn btn-primary ml-2 mb-2">{{'helpdesk.save' | translate}}</button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+
+                    <ngb-tab title="{{'helpdesk.loginmangement' | translate}}" id="LM" class="mb-3">
+                        <ng-template ngbTabContent>
+
+                            <div class="">
+                                <div class="table-responsive">
+                                    <table class=" mt-4 table table-bordered text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>{{'helpdesk.sNo' | translate}}</th>
+                                                <th>{{'helpdesk.username' | translate}}</th>
+                                                <th>{{'helpdesk.emailid' | translate}}</th>
+                                                <th>{{'helpdesk.employeeid' | translate}}</th>
+                                                <th>{{'helpdesk.logintime' | translate}}</th>
+                                                <th>{{'helpdesk.logouttime' | translate}}</th>
+                                                <th>{{'helpdesk.loginlocation' | translate}}</th>
+                                                <th>{{'helpdesk.iPaddress' | translate}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="userloginhistory?.length != 0">
+                                            <tr *ngFor="let data of userloginhistory;let i=index">
+                                                <td>
+                                                    {{i+1}}
+                                                </td>
+                                                <td>{{data.userName}}</td>
+                                                <td>{{data.emailId}}</td>
+                                                <td>{{data.employeeId}}</td>
+                                                <td>{{data.loginTime |date:'dd/MMM/yyyy, hh:mm:ss a'}}</td>
+                                                <td>{{data.logoutTime |date:'dd/MMM/yyyy, hh:mm:ss a'}}</td>
+                                                <td></td>
+                                                <td>{{data.loginIP}}</td>
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab title="{{'helpdesk.activitylogs' | translate}}" id="AL" class="mb-3">
+                        <ng-template ngbTabContent>
+
+                            <div class="table-responsive text-center">
+                                <div class="example-table-container">
+
+                                    <table mat-table [dataSource]="dataSourceactivitylogs" matSort
+                                        class="example-table">
+                                        <ng-container matColumnDef="position">
+                                            <th mat-header-cell *matHeaderCellDef>
+                                                {{'helpdesk.sNo' | translate}}
+                                            </th>
+                                            <td mat-cell *matCellDef="let row;let i = index">
+                                                {{i + (paginator.pageIndex * paginator.pageSize) + 1}}
+                                            </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="actionPerformedOnEmployeeId">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                {{'helpdesk.employeeid' | translate}}
+                                            </th>
+                                            <td mat-cell *matCellDef="let row">{{row.actionPerformedOnEmployeeId}}
+                                            </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="actionPerformedByEmployeeId">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                {{'helpdesk.actionperformedby' | translate}}{{'helpdesk.employeeid' | translate}}
+                                            </th>
+                                            <td mat-cell *matCellDef="let row">{{row.actionPerformedByEmployeeId}}
+                                            </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="actionPerformedByRole">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                {{'helpdesk.actionperformedby' | translate}}
+                                            </th>
+                                            <td mat-cell *matCellDef="let row">{{row.actionPerformedByRole}}
+                                            </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="action">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                {{'helpdesk.action' | translate}}
+                                            </th>
+                                            <td mat-cell *matCellDef="let row">{{row.action}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="actionPerformedDateTime">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+                                                {{'helpdesk.actionperformeddatetime' | translate}}
+                                            </th>
+                                            <td mat-cell *matCellDef="let row">{{row.actionPerformedDateTime |
+                                                date:'dd-MM-yyyy hh:mm:ss'}}
+                                            </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="displayColumns">
+                                        </tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayColumns;"
+                                            [style.cursor]="'pointer'">
+                                        </tr>
+                                    </table>
+                                    <mat-error *ngIf="dataSourceactivitylogs.filteredData.length == 0"
+                                        class="text-center" style="font-size: 20px;">
+                                        <b>
+                                            <span>No Records
+                                                Found
+                                            </span>
+                                        </b>
+                                    </mat-error>
+                                </div>
+                                <mat-paginator class="mat-paginator-sticky" #paginator [length]="totalRecord"
+                                    [pageIndex]="tablePageIndex" [pageSize]="itemsPerPage" (page)="onPageChange($event)"
+                                    [pageSizeOptions]="[5,10, 20,100]" showFirstLastButtons>
+                                </mat-paginator>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+                </ngb-tabset>
+
+            </app-card>
+        </form>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+        <div class="form-group">
+            <!-- <button type="button" class="btn btn-primary m-r-5" >Next</button>
+            <button *ngIf="navtabdata == 'LM'" type="button" class="btn btn-secondary m-r-5" >Back</button>
+            <button *ngIf="navtabdata == 'AL'" type="button" class="btn btn-secondary m-r-5" >Back</button>
+            <button type="button" class="btn btn-secondary" routerLink="/helpdesk/user-management/list">Cancel</button> -->
+            <button type="button" class="btn btn-secondary m-r-5"
+                routerLink="/helpdesk/user-management/list"> {{'helpdesk.back' | translate}}</button>
+
+        </div>
+
+    </div>
+</div>

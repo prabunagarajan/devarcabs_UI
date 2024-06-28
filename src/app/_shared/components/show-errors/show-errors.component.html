@@ -1,0 +1,19 @@
+<ng-container *ngIf="frmSub && control?.errors || control?.dirty">
+    <div class="error-msg">
+        <span *ngIf="control.errors?.required" >
+            <i class="fa fa-times"></i> {{eleName}} {{'master.common.isrequired' | translate}}
+        </span>
+        <span *ngIf="control.errors?.email">
+            {{eleName}} must be a valid email address
+        </span>
+        <span *ngIf="control.errors?.pattern">
+            Please enter valid {{eleName}}
+        </span>
+        <span *ngIf="control.errors?.minlength">
+            {{eleName}} should have Minimum {{control.errors?.minlength.requiredLength}} Numbers
+        </span>
+        <span *ngIf="control.errors?.maxlength">
+            {{eleName}} should have Maximum {{control.errors?.maxlength.requiredLength}} Numbers
+        </span>
+    </div>
+</ng-container>

@@ -1,0 +1,200 @@
+<div class="auth-wrapper">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-12 p-0">
+		<div class="auth-content margin0auto">
+			<div class="card animate__animated animate__backInUp">
+				<div class="row align-items-center text-center">
+					<div class="col-md-12">
+						<form [formGroup]="loginform">
+							<div class="card-body">
+								<img src="assets/images/logo-d-dark.png" alt="" class="img-fluid mb-2">
+								<h4 class="mb-3 f-w-400">Login</h4>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="feather icon-mail"></i></span>
+									</div>
+									<input type="email" class="form-control" placeholder="Email address"
+										formControlName="mail" autocomplete="username">
+									<div class="col-12 text-left">
+										<span class="error-msg"
+											*ngIf="loginform.get('mail')?.errors?.required && formsubmitted">
+											<i class="fa fa-times"></i> Mail is Required
+										</span>
+									</div>
+								</div>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="feather icon-lock"></i></span>
+									</div>
+									<input [type]="showPass ? 'text' : 'password'" class="form-control"
+										placeholder="Password" formControlName="password"
+										autocomplete="current-password">
+									<a class="password-view" style="cursor: pointer;">
+										<i class="feather icon-eye" *ngIf="!showPass" (click)="onTogglePass(true)"></i>
+										<i class="feather icon-eye-off" *ngIf="showPass"
+											(click)="onTogglePass(false)()"></i>
+									</a>
+									<div class="col-12 text-left">
+										<span class="error-msg"
+											*ngIf="loginform.get('password')?.errors?.required && formsubmitted">
+											<i class="fa fa-times"></i> Password is Required
+										</span>
+									</div>
+								</div>
+								<div class="form-group text-left">
+									<button type="button" class="btn btn-info pull-right" (click)="refreshCaptcha()"><i
+											class="feather icon-refresh-cw"></i></button>
+									<canvas #canvasEl height="36" class="login-captcha"></canvas>
+								</div>
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="feather icon-layers"></i></span>
+									</div>
+									<input type="text" class="form-control" placeholder="Enter Captcha"
+										formControlName="captchatext" required>
+									<div class="col-12 text-left">
+										<span class="error-msg"
+											*ngIf="loginform.get('captchatext')?.errors?.required && formsubmitted">
+											<i class="fa fa-times"></i> Captcha is Required <br>
+										</span>
+										<span class="error-msg" *ngIf="captchaMatch">
+											<i class="fa fa-times"></i> Captcha text not match <br>
+										</span>
+									</div>
+								</div>
+								<button class="btn btn-block btn-primary mb-2" (click)="onLogin()">Login</button>
+								<div class="col-12 text-left">
+									<span class="error-msg" *ngIf="errorFlag || ShowERROR">
+										<i class="fa fa-times"></i> The email or password is incorrect <br>
+									</span>
+								</div>
+								<p class="mb-2 text-muted">Forgot password?
+									<a class="f-w-400" style="cursor: pointer;" data-toggle="modal"
+										data-target="#customerReset">Reset</a>
+								</p>
+								<p class="mb-0 text-muted">Grievance <a
+										[routerLink]="['/authentication/grievance_registration']"
+										class="f-w-400">Register</a></p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row align-items-center text-center mt-2 px-2">
+			<div class="col-md-12 animate__animated animate__backInUp text-white mb-3">
+				Copyright &copy; {{currentyear}} Uttar Pradesh Excise Department. India | All Rights Reserved.<br />
+				Powered By <img src="assets/images/poweredby-icon.png" alt="OASYS Cybernetics Pvt Ltd"><br />
+				<i class="feather icon-globe"></i> Browser Compatibility : Chrome 45+, Firefox45+, Safari 3.x+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="customerReset" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="card-body text-center">
+				<button type="button" #closebutton class="close" data-dismiss="modal">&times;</button>
+				<img src="assets/images/logo-d-dark.png" alt="" class="img-fluid mb-2 text-center">
+				<h4 class="mb-2 f-w-400 text-center">Reset your password</h4>
+				<p class="mb-4 f-w-400 text-center">Enter Below Details to Reset your Password</p>
+				<form [formGroup]="cusResetOTPform">
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="feather icon-mail"></i></span>
+						</div>
+						<input type="email" class="form-control" placeholder="Email address" formControlName="emailId"
+							required>
+					</div>
+					<div *ngIf="formsubmittedReset && cusResetOTPform.get('emailId').errors || cusResetOTPform.get('emailId').touched "
+						class="error-msg mb-2">
+						<span *ngIf="cusResetOTPform.get('emailId').errors?.required">
+							<i class="fa fa-times"></i> Email Id is required
+						</span>
+					</div>
+
+					<div class="d-flex">
+						<button class="btn w-50 btn-secondary mb-4" data-dismiss="modal">Cancel</button>
+						<button class="btn w-50 btn-primary ml-2 mb-4" type="submit" (click)="onGenerateOTP()">Generate
+							OTP</button>
+					</div>
+				</form>
+				<form [formGroup]="cusResetform" autocomplete="off">
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="feather icon-phone"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Enter your otpCode"
+							formControlName="otpCode">
+					</div>
+
+					<div *ngIf="formsubmittedReset && f.otpCode.errors || f.otpCode.touched " class="error-msg mb-2">
+						<span *ngIf="f.otpCode.errors?.required">
+							<i class="fa fa-times"></i> OtpCode is required
+						</span>
+					</div>
+					<div class="text-right mb-1" *ngIf="counter > 0">
+						<i class="feather icon-clock font-weight-bold"> 0.{{counter}}</i>
+					</div>
+					<div class="d-flex">
+						<button class="btn w-50 btn-secondary mb-4" disabled="{{resetOTPBtnState}}"
+							(click)="onReGenerateOTP()">Resend OTP</button>
+					</div>
+
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="feather icon-lock"></i>
+							</span>
+						</div>
+						<input [type]="showPassnew ? 'text' : 'password'" class="form-control"
+							formControlName="password" placeholder="New Password" autocomplete="new-password">
+						<a class="password-view" style="cursor: pointer;">
+							<i class="feather icon-eye" *ngIf="!showPassnew" (click)="onTogglePassnew(true)"></i>
+							<i class="feather icon-eye-off" *ngIf="showPassnew" (click)="onTogglePassnew(false)()"></i>
+						</a>
+					</div>
+
+					<div *ngIf="formsubmittedReset && cusResetform.get('password').errors || cusResetform.get('password').touched "
+						class="error-msg mb-2">
+						<span *ngIf="cusResetform.get('password').errors?.required">
+							<i class="fa fa-times"></i> New Password is required
+						</span>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<i class="feather icon-lock"></i>
+								</span>
+							</div>
+
+							<input [type]="showPasscon ? 'text' : 'password'" class="form-control"
+								formControlName="confirm_password" placeholder="Confirm Password"
+								autocomplete="new-password">
+							<a class="password-view" style="cursor: pointer;">
+								<i class="feather icon-eye" *ngIf="!showPasscon" (click)="onTogglePasscon(true)"></i>
+								<i class="feather icon-eye-off" *ngIf="showPasscon"
+									(click)="onTogglePasscon(false)()"></i>
+							</a>
+						</div>
+
+						<div *ngIf="formsubmittedReset && f.confirm_password.errors || f.confirm_password.touched "
+							class="error-msg mb-2">
+							<span *ngIf="f.confirm_password.errors?.required">
+								<i class="fa fa-times"></i> Confirm Password is required
+							</span>
+						</div>
+					</div>
+					<div class="d-flex">
+						<button class="btn w-50 btn-secondary mb-4" (click)="clearReset()">Clear</button>
+						<button class="btn w-50 btn-primary ml-2 mb-4" (click)="onResetPassWithOTP()">Submit</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

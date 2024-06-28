@@ -1,0 +1,141 @@
+<h5 class="m-b-10 ng-star-inserted">
+
+    View Sub Solution</h5>
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Sub Solution</a></li>
+</ul>
+
+
+<div class="row mb-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <form autocomplete="off">
+            <app-card cardTitle="View Sub Solution" class="list-panel view-panel">
+                <div class="row mb-2 pb-2">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Sub-Solution ID<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.ticketCategoryName}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Category<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.ticketSubcategoryName}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.subcategory' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.priorityName}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Priority<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.priorityName}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">SLA<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.createdBy}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Issue Details<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.modifiedBy}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Sub-Solution<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.createdDate|date:'medium'}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Remarks<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{subSolutionDetails?.modifiedDate|date:'medium'}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <p class="w-100 view-label">Issue Resolved<span class="float-right">:</span></p>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <div class="segment">
+                            <input type="radio" name="issueResStatus" (click)="updateIssueRes('Yes')" id="tab1" checked>
+                            <label class="" for="tab1">Yes</label>
+                            <input type="radio" name="issueResStatus" (click)="updateIssueRes('No')" id="tab2">
+                            <label class="" for="tab2">No</label>
+                        </div>
+                    </div>
+                </div>
+            </app-card>
+        </form>
+    </div>
+    <div class="col-12 text-right">
+        <button type="button" class="btn btn-primary mr-2" (click)="issueResolution()">Submit</button>
+        <button type="button" class="btn btn-secondary" routerLink="/helpdeskmaster/subsolution/list">{{'helpdesk.back' | translate}}elpdesk.back' | translate}}</button>
+    </div>
+</div>
+<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+    <form #indentrequestForm="ngForm" autocomplete="off">
+        <app-card cardTitle="Approval Log" class="list-panel view-panel">
+            <div class="row m-4 timeline_card">
+                <div class="col-12">
+                    <div class="timeline_icon text-center timeline_icon_bg1 h-100">
+                        <i class="far fa-comments"></i>
+                        <small>20/03/21<br> 10:00</small>
+                    </div>
+                    <div class="timeline_content">
+                        <div class="w-100 p-3 rounded timeline_box timeline_bg1">
+                            <h6>DEO Sunil Singh</h6>
+                            <p class="mb-0">Created Date</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="timeline_icon text-center timeline_icon_bg3 h-100">
+                        <i class="fas fa-check"></i>
+                        <small>20/03/21<br> 11:00</small>
+                    </div>
+                    <div class="timeline_content">
+                        <div class="w-100 p-3 rounded timeline_box timeline_bg2">
+                            <h6>Ware House</h6>
+                            <p class="mb-0">created By</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="timeline_icon text-center timeline_icon_bg2 h-100">
+                        <i class="fas fa-check"></i>
+                        <small>20/03/21<br> 11:30</small>
+                    </div>
+                    <div class="timeline_content">
+                        <div class="w-100 p-3 rounded timeline_box timeline_bg3">
+                            <h6>Brewery</h6>
+                            <p class="mb-0">Approved Date</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="timeline_icon text-center timeline_icon_bg2 h-100">
+                        <i class="fas fa-check"></i>
+                        <small>20/03/21<br> 12:00</small>
+                    </div>
+                    <div class="timeline_content">
+                        <div class="w-100 p-3 rounded timeline_box timeline_bg3">
+                            <h6>Brewery</h6>
+                            <p class="mb-0">Approved By</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </app-card>
+    </form>
+
+</div>

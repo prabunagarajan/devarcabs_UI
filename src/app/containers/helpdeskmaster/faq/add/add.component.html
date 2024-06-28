@@ -1,0 +1,128 @@
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId ==''">
+    {{'helpdesk.add' | translate}}   {{'helpdesk.faq' | translate}}
+</h5>
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId !=''">
+    {{'helpdesk.editfaq' | translate}}
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.faq' | translate}}</a></li>
+    <li *ngIf="editId" class="breadcrumb-item"><a href="javascript:"></a> {{'helpdesk.edit' | translate}}</li>
+    <li *ngIf="editId == undefined" class="breadcrumb-item"><a href="javascript:"></a>{{'helpdesk.add' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <form [formGroup]="createForm" autocomplete="off">
+            <app-card cardTitle="{{'helpdesk.faqdetails' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.faqcode' | translate}}</label>
+                            <input type="text" class="form-control" readonly placeholder="WC1122" formControlName="faqCode" name="faqCode">
+                            <!-- <div *ngIf="formSubmitted && createForm.get('wofklowCode').errors || createForm.get('wofklowCode').touched " class="error-msg">
+                                <span *ngIf="createForm.get('wofklowCode').errors?.required">
+                                FAQ Code {{'helpdesk.isrequired' | translate}}
+                            </span>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.question' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="{{'helpdesk.question' | translate}}" formControlName="question" name="question" required>
+                            <div *ngIf="formSubmitted && createForm.get('question').errors || createForm.get('question').touched " class="error-msg">
+                                <span *ngIf="createForm.get('question').errors?.required">
+                                    {{'helpdesk.question' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.answer' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="{{'helpdesk.answer' | translate}}" formControlName="answer" name="answer"  required>
+                            <div *ngIf="formSubmitted && createForm.get('answer').errors || createForm.get('answer').touched " class="error-msg">
+                                <span *ngIf="createForm.get('answer').errors?.required">
+                                    {{'helpdesk.answer' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.category' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="category" required name="category" (change)="getservice()" >
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option  *ngFor="let data of dropdowngetcatogry" value="{{data.id}}">{{data.categoryName}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('category').errors || createForm.get('category').touched " class="error-msg">
+                                <span *ngIf="createForm.get('category').errors?.required">
+                                    {{'helpdesk.category' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.subcategory' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="subCategory" required name="subCategory">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of dropdown" value="{{data.id}}">{{data.subcategoryName}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('subCategory').errors || createForm.get('subCategory').touched " class="error-msg">
+                                <span *ngIf="createForm.get('subCategory').errors?.required">
+                                    {{'helpdesk.subcategory' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.status' | translate}}<span class="text-danger">*</span></label>
+                            <!-- <div class="custom-control custom-switch">
+                                <input type="checkbox" id="status" name="status" 
+                                formControlName="Status" class="custom-control-input" id="customswitch1">
+                                <label class="custom-control-label" for="customswitch1">                            
+                                    <label><span style="width: px;">{{f.Status.value ? "Active" : "Inactive"}}</span></label>
+                            </label>
+                            </div> -->
+                            <select class="form-control" 
+                            formControlName="Status" required name="status">
+                           <option value="">{{'helpdesk.select' | translate}}</option>
+                           <option value="true">Active</option>
+                           <option value="false">InActive</option>
+                           </select>
+                            <div *ngIf="formSubmitted && createForm.get('Status').errors || createForm.get('Status').touched " class="error-msg">
+                            <span *ngIf="createForm.get('Status').errors?.required">
+                            {{'helpdesk.status' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </span>
+                        </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </app-card>
+        </form>
+    </div>
+    <div class="col-12 text-right mb-4">
+        <button type="button" class="btn btn-primary ml-2 mb-2" (click)="addRegistration(createForm)">{{'helpdesk.submit' | translate}}</button>
+        <button type="button" class="btn btn-secondary ml-2 mb-2" routerLink="/helpdeskmaster/faq/list">{{'helpdesk.cancel' | translate}}</button>
+    </div>
+</div>
+<app-ui-modal #exampleModalCenter dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success">{{'helpdesk.appsubmitsuccess' | translate}}</h3>
+        <!-- <h6>Your Application Number is <span class="badge badge-light-success">WH45628665456</span></h6> -->
+    </div>
+</app-ui-modal>

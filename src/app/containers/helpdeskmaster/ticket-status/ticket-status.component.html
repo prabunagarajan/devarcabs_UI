@@ -1,0 +1,121 @@
+<h5 class="m-b-10 ng-star-inserted">
+    {{'helpdesk.ticketstatus' | translate}}
+    <button type="submit" class="btn btn-success pull-right custom_add_button"
+        routerLink='/helpdeskmaster/ticket-status/add'>
+        <i class="feather icon-plus mr-2"></i>
+             {{'helpdesk.addticketstatus' | translate}}
+    </button>
+</h5>
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">    {{'helpdesk.ticketstatus' | translate}}</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.list' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <!-- <form [formGroup]="createForm" autocomplete="off"> -->
+            <app-card cardTitle="{{'helpdesk.search' | translate}}" class="search-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>     {{'helpdesk.ticketstatus' | translate}}</label>
+                            <select class="form-control" name="ticketstatusname" #ticketstatusname="ngModel" [(ngModel)]="searchList['ticketstatusname']" autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of ticketStatusDropdown" value="{{data.id}}">{{data.ticketstatusname}}</option>
+                            </select>
+                        </div>
+                    
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>    {{'helpdesk.status' | translate}}</label>
+                            <select class="form-control" 
+                            #status="ngModel" [(ngModel)]="searchList['status']"  name="status">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                            </select>
+                        </div>
+                        <!-- <div *ngIf="formSubmitted && f.status.invalid" class="error-msg">
+                            Status {{'helpdesk.isrequired' | translate}}
+                        </div> -->
+                    </div>
+
+                    <div class="col-3" style="margin-top: 25px;">
+
+                        <button type="submit" class="btn btn-primary mr-2" (click)="search()">{{'helpdesk.search' | translate}}</button>
+                        <button type="submit" class="btn btn-secondary" (click)="clear()">   {{'helpdesk.clear' | translate}}</button>
+
+                    </div>
+                </div>
+            </app-card>
+        <!-- </form> -->
+    </div> 
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="    {{'helpdesk.ticketstatuslist' | translate}} " blockClass="table-border-style" class="list-panel">
+            <div class="table-responsive">
+                <table class="table table-bordered" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                        <tr>
+                            <th>{{'helpdesk.sNo' | translate}}</th>
+                            <th>    {{'helpdesk.ticketstatus' | translate}}</th>
+                            <th>{{'helpdesk.createdby' | translate}}</th>
+                            <th>{{'helpdesk.createdon' | translate}}</th>
+                            <th>{{'helpdesk.Modifiedby' | translate}}</th>
+                            <th>{{'helpdesk.Modifiedon' | translate}}</th>
+                            <th>  {{'helpdesk.status' | translate}}</th>
+                            <th>  {{'helpdesk.action' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="list?.length != 0">
+                        <tr *ngFor="let data of list;let i=index">
+                            <td>
+                                {{i+1}}
+                            </td>
+
+                            <td>{{data.ticketstatusname}}</td>
+                            <td>{{data.created_by}}</td>
+                            <td>{{data.created_date|date:'MMM dd,yyyy, hh:mm:ss a'}}</td>
+                            <td>{{data.modified_by}}</td>
+                            <td>{{data.modified_date|date:'MMM dd,yyyy, hh:mm:ss a'}}</td>
+                            <td>
+                                <span class="badge m-r-5 badge-light-success" *ngIf="data.status== '1'">Active</span>
+                                <span class="badge m-r-5 badge-light-danger" *ngIf="data.status== '0'">Inactive</span>
+                            </td>
+                            <td class="table-action-column text-center">
+                                <button class="btn btn-icon btn-primary mr-2" type="button"
+                                    (click)="navigateView(data.id)">
+                                    <i class="feather icon-eye"></i></button>
+                                <button class="btn btn-icon btn-secondary mr-2" type="button"
+                                    (click)="navigateEdit(data.id)">
+                                    <i class="feather icon-edit"></i></button>    
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 mt-2">
+                    <div ngbDropdown>
+                        <button *ngIf="list?.length != 0 && list?.length != undefined " (click)="export()" class="btn btn-success"  type="button">{{'helpdesk.download' | translate}}</button>
+
+                        <!-- <button class="btn btn-success" ngbDropdownToggle type="button">{{'helpdesk.download' | translate}}</button>
+                        <div ngbDropdownMenu>
+                            <a class="dropdown-item" 
+                                href="javascript:">Excel</a>
+                            <a class="dropdown-item" 
+                                href="javascript:">Pdf</a>
+                            <a class="dropdown-item" 
+                                href="javascript:">JPG</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

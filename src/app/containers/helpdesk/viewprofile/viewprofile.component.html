@@ -1,0 +1,285 @@
+<h5 class="m-b-10 ng-star-inserted">{{'helpdesk.viewprofile' | translate}}
+</h5>
+
+<ul class="breadcrumb p-0">
+  <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+  <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdesk' | translate}} </a></li>
+  <li class="breadcrumb-item">{{'helpdesk.viewprofile' | translate}} </li>
+</ul>
+<form [formGroup]="changePasswordForm" autocomplete="off">
+
+  <div class="row">
+    <div class="col-12">
+      <app-card cardTitle="{{'helpdesk.personaldetails' | translate}} " class="list-panel add-panel">
+        <ngb-tabset type="pills" #t="ngbTabset" (tabChange)="tabChange($event)">
+          <ngb-tab title="{{'helpdesk.profile' | translate}}" class="mb-3" id="profile-tab">
+            <ng-template ngbTabContent>
+              <br>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="example-container">
+                    <app-card cardTitle="{{'helpdesk.personaldetails' | translate}}" class="list-panel add-panel">
+                      <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.name' | translate}} <span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{obj?.username}}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.address' | translate}} <span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{obj?.address}}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.mobilenumber' | translate}}<span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{obj?.phoneNumber}}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.designation' | translate}}<span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{obj?.designationValue}}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.dateofjoining' | translate}}<span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{obj?.dateOfJoining}}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.department' | translate}}<span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{workLocationResponseDTO}}
+                        </div>
+                      </div>
+                    </app-card>
+                    <app-card cardTitle="{{'helpdesk.shiftdetails' | translate}}" class="list-panel add-panel"
+                      *ngIf="role !='DEPARTMENT'">
+                      <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.date' | translate}}<span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{shiftConfigurationResponseDTO }}
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          <label class="w-100 view-label">{{'helpdesk.shiftname' | translate}}<span
+                              class="float-right">:</span></label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                          {{configuration}}
+                        </div>
+                      </div>
+                    </app-card>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="{{'helpdesk.changepassword' | translate}}" class="mb-3" id="change-pwd-tab">
+            <ng-template ngbTabContent>
+              <br>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="example-container">
+                    <app-card cardTitle="{{'helpdesk.changepassword' | translate}}" class="list-panel add-panel">
+                      <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                          <div class="form-group">
+                            <label>
+                              {{'helpdesk.currentpassword' | translate}}
+                              <span class="text-danger">*</span>
+                            </label>
+                            <input [type]="hide1 ? 'text' : 'password'" class="form-control" name="currentPassword"
+                              disabled *ngIf="!submitbuttonenable" formControlName="currentPassword"
+                              placeholder="******">
+                            <div *ngIf="submitbuttonenable" class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span *ngIf="submitbuttonenable" class="input-group-text">
+                                  <i class="feather icon-lock"></i></span>
+                              </div>
+                              <input [type]="hide1 ? 'text' : 'password'" required class="form-control"
+                                name="currentPassword" *ngIf="submitbuttonenable" formControlName="currentPassword"
+                                placeholder="Current Password">
+                              <a *ngIf="submitbuttonenable" class="password-view" style="cursor: pointer;">
+                                <i class="feather icon-eye" *ngIf="!hide1" (click)="onTogglePass1(true)"></i>
+                                <i class="feather icon-eye-off" *ngIf="hide1" (click)="onTogglePass1(false)()"></i>
+                              </a>
+                            </div>
+                            <div
+                              *ngIf="formSubmitted && changePasswordForm.get('currentPassword').errors || changePasswordForm.get('currentPassword').touched "
+                              class="error-msg">
+                              <div
+                                *ngIf="formSubmitted && changePasswordForm.get('currentPassword').errors || changePasswordForm.get('currentPassword').touched "
+                                class="error-msg">
+                                <span *ngIf="changePasswordForm.get('currentPassword').errors?.required">
+                                  {{'helpdesk.currentpassword' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12" *ngIf="submitbuttonenable">
+                          <div class="form-group">
+                            <label>
+                              {{'helpdesk.confirmpassword' | translate}}
+                              <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="feather icon-lock"></i></span>
+                              </div>
+                              <input [type]="hide2 ? 'text' : 'password'" required class="form-control" name="password"
+                                formControlName="password" placeholder="Confirm Password" minlength="8"
+                                pattern="pattern">
+                              <a class="password-view" style="cursor: pointer;">
+                                <i class="feather icon-eye" *ngIf="!hide2" (click)="onTogglePass2(true)"></i>
+                                <i class="feather icon-eye-off" *ngIf="hide2" (click)="onTogglePass2(false)()"></i>
+                              </a>
+                            </div>
+                            <div
+                              *ngIf="formSubmitted && changePasswordForm.get('password').errors || changePasswordForm.get('password').touched "
+                              class="error-msg">
+                              <span *ngIf="changePasswordForm.get('password').errors?.required">
+                                {{'helpdesk.confirmpassword' | translate}} {{'helpdesk.isrequired' | translate}}
+                              </span>
+                              <span *ngIf="f.password?.errors?.minlength">
+                                <i class="fa fa-times-circle-o"></i> Password must be at least 8
+                                characters
+                              </span>
+                              <span *ngIf="!f.password?.errors?.minlength && f.password.errors?.pattern">Please enter
+                                valid password</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12" *ngIf="submitbuttonenable">
+                          <div class="form-group">
+                            <label>
+                              {{'helpdesk.reconfirmpassword' | translate}}
+                              <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="feather icon-lock"></i></span>
+                              </div>
+                              <input [type]="hide3 ? 'text' : 'password'" required class="form-control"
+                                name="confirmPassword" formControlName="confirmPassword"
+                                placeholder="Re-confirm Password">
+                              <a class="password-view" style="cursor: pointer;">
+                                <i class="feather icon-eye" *ngIf="!hide3" (click)="onTogglePass3(true)"></i>
+                                <i class="feather icon-eye-off" *ngIf="hide3" (click)="onTogglePass3(false)()"></i>
+                              </a>
+                            </div>
+                            <div
+                              *ngIf="formSubmitted && changePasswordForm.get('confirmPassword').errors || changePasswordForm.get('confirmPassword').touched "
+                              class="error-msg">
+                              <span *ngIf="changePasswordForm.get('confirmPassword').errors?.required">
+                                {{'helpdesk.reconfirmpassword' | translate}} {{'helpdesk.isrequired' | translate}}
+                              </span>
+                              <span *ngIf="f.confirmPassword?.errors?.minlength">
+                                <i class="fa fa-times-circle-o"></i> Password must be at least 8
+                                characters
+                              </span>
+                              <span
+                                *ngIf="!f.confirmPassword?.errors?.minlength && f.confirmPassword.errors?.pattern">Please
+                                enter valid password</span>
+                              <span *ngIf="f.confirmPassword?.errors?.mustMatch">
+                                <i class="fa fa-times-circle-o"></i> Passwords must match
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <small *ngIf="submitbuttonenable"
+                        style="text-transform: capitalize  !important ; font-weight: 500;"> {{'helpdesk.passwordhint' |
+                        translate}}</small>
+                    </app-card>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                        <div class="form-group float-right">
+                          <!-- <button class="btn btn-primary mr-2" *ngIf="showNextButton">Next</button> -->
+                          <button class="btn btn-warning mr-2" *ngIf="!submitbuttonenable" (click)="enablesubmit()">
+                            {{'helpdesk.changepassword' | translate}}</button>
+                          <button class="btn btn-success mr-2" *ngIf="submitbuttonenable"
+                            (click)="submitChangePassword(changePasswordForm)"> {{'helpdesk.submit' |
+                            translate}}</button>
+                          <!-- <button class="btn btn-secondary mr-2" >Back</button> -->
+                          <button class="btn btn-secondary" (click)="backNo()"> {{'helpdesk.cancel' |
+                            translate}}</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="   {{'helpdesk.notification' | translate}}" class="mb-3" id="notification-tab">
+            <ng-template ngbTabContent>
+              <br>
+              <div class="row">
+                <div class="col-xl-12">
+                  <app-card cardTitle=" {{'helpdesk.notificationdetails' | translate}}" blockClass="table-border-style"
+                    class="list-panel add-panel list-search">
+                    <div class="table-responsive text-center">
+                      <table class="table table-bordered" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+
+                        <thead>
+                          <tr>
+                            <th>{{'helpdesk.sNo' | translate}}</th>
+                            <th>{{'helpdesk.ticketid' | translate}}</th>
+                            <th>{{'helpdesk.createddate' | translate}}</th>
+                            <th>{{'helpdesk.status' | translate}}</th>
+                            <th>{{'helpdesk.action' | translate}}</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="notification?.length != 0">
+                          <tr *ngFor="let data of notification;let i=index">
+                            <td>
+                              {{i+1}}
+                            </td>
+                            <td class="text-center">{{data.ticketNumber}}</td>
+                            <td class="text-center">{{data.createdDate|date:'medium'}} </td>
+                            <td class="text-center">
+                              <span class="badge m-r-5 badge-light-success">{{data.ticketStatus}}</span>
+                         
+                            </td>
+                            <td class="table-action-column text-center">
+                              <button class="btn btn-icon btn-primary mr-2" type="button" (click)="updateFlag(data)">
+                                <i class="feather icon-eye"></i></button>
+                            </td>
+                          </tr>
+                      </table>
+                    </div>
+                  </app-card>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                  <div class="form-group float-right">
+                    <button class="btn btn-secondary" (click)="backNo()">{{'helpdesk.back' | translate}}</button>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </app-card>
+
+    </div>
+  </div>
+</form>

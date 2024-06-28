@@ -1,0 +1,125 @@
+<h5 class="m-b-10 ng-star-inserted">
+    Sub Solution
+    <button type="submit" class="btn btn-success pull-right custom_add_button"
+        routerLink='/helpdeskmaster/subsolution/add'>
+        <i class="feather icon-plus mr-2"></i>
+        Add Sub Solution
+    </button>
+</h5>
+
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:"> Sub Solution</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.list' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="{{'helpdesk.search' | translate}}" class="search-panel">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label> Category</label>
+                        <select class="form-control" name="category" #category="ngModel"
+                            [(ngModel)]="searchList['category']" autocomplete="off" (change)="getSubCategory()">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option *ngFor="let data of cat" value="{{data.id}}">{{data.categoryName}}</option>
+                        </select>
+                        <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label> {{'helpdesk.subcategory' | translate}}</label>
+                        <select class="form-control" name="subCategory" #subCategory="ngModel"
+                            [(ngModel)]="searchList['subCategory']" autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option *ngFor="let data of sub" value="{{data.id}}">{{data.subcategoryName}}</option>
+                        </select>
+                        <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Issue Details</label>
+                        <select class="form-control" name="issue" #issue="ngModel"
+                            [(ngModel)]="searchList['issue']" autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option *ngFor="let data of issuedropdown" value="{{data.id}}">{{data.issueName}}</option>
+                        </select>
+                        <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label> Status</label>
+                        <select class="form-control" name="status" #status="ngModel" [(ngModel)]="searchList['status']"
+                            autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                        </select>
+                        <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+                    </div>
+                </div>
+                <div class="col-12 text-right">
+
+                    <button type="submit" class="btn btn-primary mr-2">{{'helpdesk.search' | translate}}</button>
+                    <button type="submit" class="btn btn-secondary">{{'helpdesk.cancel' | translate}}pdesk.cancel' | translate}}pdesk.cancel' | translate}}</button>
+
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="Workflow List" blockClass="table-border-style" class="list-panel">
+            <div class="table-responsive">
+                <table class="table table-bordered" datatable>
+                    <thead>
+                        <tr>
+                            <th>{{'helpdesk.sNo' | translate}}</th>
+                            <th>Category</th>
+                            <th>{{'helpdesk.subcategory' | translate}}</th>
+                            <th>Priority</th>
+                            <th>SLA</th>
+                            <th>Issue Details</th>
+                            <th>Remarks</th>
+                            <th>Status</th>
+
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="list?.length != 0">
+                        <tr *ngFor="let data of list;let i=index">
+                            <td>
+                                {{i+1}}
+                            </td>
+
+                            <td>{{data.ticketCategoryName}}</td>
+                            <td>{{data.ticketSubcategoryName}}</td>
+                            <td>{{data.priority}}</td>
+                            <td>{{data.sla}}</td>
+                            <td>-</td>
+                            <td>{{data.remarks}}</td>
+                            <td>
+                                <span class="badge m-r-5 badge-light-success" *ngIf="data.status">Active</span>
+                                <span class="badge m-r-5 badge-light-danger" *ngIf="!data.status">Inactive</span>
+                            </td>
+                            <td class="table-action-column text-center">
+                                <button class="btn btn-icon btn-primary mr-2" type="button"
+                                    (click)="navigateView(data.id)">
+                                    <i class="feather icon-eye"></i></button>
+                                <button class="btn btn-icon btn-secondary mr-2" type="button"
+                                    (click)="navigateEdit(data.id)">
+                                    <i class="feather icon-edit"></i></button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </app-card>
+    </div>
+</div>

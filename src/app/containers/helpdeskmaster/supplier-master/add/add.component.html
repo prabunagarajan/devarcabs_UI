@@ -1,0 +1,108 @@
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId ==''">
+    {{'helpdesk.addsupplier' | translate}}
+</h5>
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId !=''">
+    {{'helpdesk.editsupplier' | translate}}
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdesk' | translate}} </a></li>
+    <li class="breadcrumb-item"><a href="/helpdesk/user-management/list"> {{'helpdesk.supplier' | translate}}</a></li>
+    <li class="breadcrumb-item" *ngIf="editId ==undefined">  {{'helpdesk.add' | translate}}</li>
+    <li class="breadcrumb-item" *ngIf="editId !=undefined">  {{'helpdesk.edit' | translate}}</li>
+</ul>
+
+<div class="row">
+    <div class="col-xl-12">
+        <form [formGroup]="createForm" autocomplete="off">
+
+            <app-card cardTitle=" {{'helpdesk.supplierdetails' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.supplier' | translate}}  <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="supplier"
+                                placeholder="{{'helpdesk.enter' | translate}}  {{'helpdesk.supplier' | translate}} " name="firstname">
+                        </div>
+                        <div *ngIf="formSubmitted && f.supplier.invalid" class="error-msg">
+                            {{'helpdesk.supplier' | translate}}  {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.suppliername' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="supplierName"
+                                placeholder="{{'helpdesk.enter' | translate}}  {{'helpdesk.suppliername' | translate}} " name="lastname">
+                        </div>
+                        <div *ngIf="formSubmitted && f.supplierName.invalid" class="error-msg">
+                            {{'helpdesk.suppliername' | translate}}  {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.supplieraddress' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="address"
+                                placeholder="{{'helpdesk.enter' | translate}} {{'helpdesk.supplieraddress' | translate}}" name="lastname">
+                        </div>
+                        <div *ngIf="formSubmitted && f.address.invalid" class="error-msg">
+                            {{'helpdesk.supplieraddress' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.emailid' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': formSubmitted && f.email.errors }" formControlName="email"
+                                placeholder="{{'helpdesk.enter' | translate}}  {{'helpdesk.emailid' | translate}} " name="email">
+                        </div>
+                        <div *ngIf="formSubmitted && f.email.invalid" class="error-msg">
+                            {{'helpdesk.emailid' | translate}}  {{'helpdesk.isrequired' | translate}}
+                        </div>
+                        <div *ngIf="f.email.hasError('pattern')" class="error-msg">Email must be a valid email address
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.mobilenumber' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" [ngClass]="{ 'is-invalid': formSubmitted && f.mobileno.errors }"
+                                maxlength="10" class="form-control" formControlName="mobileno"
+                                placeholder="{{'helpdesk.enter' | translate}} {{'helpdesk.mobilenumber' | translate}}" name="mobileno" required>
+                        </div>
+                        <div *ngIf="formSubmitted && f.mobileno.invalid" class="error-msg">
+                            {{'helpdesk.mobilenumber' | translate}}{{'helpdesk.isrequired' | translate}}
+                        </div>
+                        <mat-error class="error-msg" *ngIf="f.mobileno.hasError('pattern') ">Enter
+                            Valid Phone Number</mat-error>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.status' | translate}}<span class="text-danger">*</span></label>
+                            <select name="status" formControlName="status" class="form-control" required>
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option value=true>Active</option>
+                                <option value=false>Inactive</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('status').errors || createForm.get('status').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('status').errors?.required">
+                                    {{'helpdesk.status' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </app-card>
+
+            <div class="col-12 text-right mb-4">
+                <button type="button" class="btn btn-primary ml-2 mb-2"
+                    (click)="addRegistration(createForm)">{{'helpdesk.submit' | translate}}</button>
+                <button type="button" class="btn btn-secondary ml-2 mb-2"
+                    routerLink="/helpdeskmaster/supplier-master/list">{{'helpdesk.cancel' | translate}}</button>
+            </div>
+
+        </form>
+    </div>
+</div>

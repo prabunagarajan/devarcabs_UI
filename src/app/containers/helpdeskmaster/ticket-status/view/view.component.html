@@ -1,0 +1,68 @@
+<h5 class="m-b-10 ng-star-inserted"> {{'helpdesk.view' | translate}}     {{'helpdesk.ticketstatus' | translate}}</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="/helpdeskmaster/ticket-status/list">    {{'helpdesk.ticketstatus' | translate}}</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.view' | translate}}</li>
+</ul>
+
+
+<div class="row mb-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <form autocomplete="off">
+            <app-card cardTitle="    {{'helpdesk.ticketstatus' | translate}} " class="list-panel view-panel">
+                <div class="row mb-2 pb-2">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">    {{'helpdesk.ticketstatuscode' | translate}} <span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.ticketstatusCode}} </span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">    {{'helpdesk.ticketstatus' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.ticketstatusname}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.status' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.status== "1" ? 'Active' : 'Inactive'}}</span>
+                    </div>
+                    <div class="col-sm-12"><hr style="height:2px;border-width:0;color:floralwhite;background-color:lightgray"></div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.createdby' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.created_by}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.createdon' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.created_date |date:'MMM dd,yyyy, hh:mm:ss a'}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.updatedby' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.modified_by}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.updatedon' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.modified_date |date:'MMM dd,yyyy, hh:mm:ss a'}}</span>
+                    </div>
+                </div>
+            </app-card>
+        </form>
+    </div>
+
+
+    <div class="col-12 text-right">
+        <!-- <button type="button" class="btn btn-primary mr-2"  >Submit</button> -->
+        <button type="button" class="btn btn-secondary" routerLink="/helpdeskmaster/ticket-status/list">{{'helpdesk.back' | translate}}</button>
+    </div>
+</div>

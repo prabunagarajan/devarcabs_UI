@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@app/*": ["./src/app/*"],
+      "@appEnv/*": ["./src/environments/*"],
+      "@appTheme/*": ["./src/app/theme/*"],
+      "@appThemeShared/*": ["./src/app/theme/shared/*"],
+      "@appThemeLayout/*": ["./src/app/theme/layout/*"],
+      "@appServices/*": ["./src/app/services/*"],
+      "@appContainer/*": ["./src/app/containers/*"],
+      "@appLicMgnt/*": ["./src/app/containers/licencemgnt/*"],
+      "@appLicMgntShared/*": ["./src/app/containers/licencemgnt/shared/*"],
+      "@appLicMgntCommon/*": ["./src/app/containers/licencemgnt/common/*"]
+    }
+  }
+}

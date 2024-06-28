@@ -1,0 +1,70 @@
+<h5 class="m-b-10 ng-star-inserted"> Add Designation</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="/helpdeskmaster/designation/list">Designation</a></li>
+    <li class="breadcrumb-item">Add</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <form [formGroup]="createForm" autocomplete="off">
+            <app-card cardTitle="Designation" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Designation Master Code</label>
+                            <input type="text" class="form-control" readonly formControlName="designationCode" disabled name="designationCode">
+                            <!-- <div *ngIf="formSubmitted && createForm.get('slaCode').errors || createForm.get('slaCode').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('slaCode').errors?.required">
+                                    SLA Code Code {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div> -->
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Designation Master Name</label>
+                            <input type="text" class="form-control" formControlName="designation" placeholder="Enter Designation Master Name" name="designation">
+                            <!-- <option *ngFor="let item of problem" value="{{item.id}}">{{item.actualProblem}}</option> -->
+                            <!-- <div *ngIf="formSubmitted && createForm.get('SLA').errors || createForm.get('SLA').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('SLA').errors?.required">
+                                    SLA {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.status' | translate}}</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="active" name="active"
+                                formControlName="active" class="custom-control-input" id="customswitch1">
+                                <label class="custom-control-label" for="customswitch1">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </app-card>
+        </form>
+    </div>
+    <div class="col-12 text-right mb-4">
+        <button type="button" class="btn btn-primary ml-2 mb-2" (click)="addDesignation()">Submit</button>
+        <button type="button" class="btn btn-secondary ml-2 mb-2"
+            routerLink="/helpdeskmaster/designation/list">{{'helpdesk.cancel' | translate}}</button>
+    </div>
+</div>
+<app-ui-modal #exampleModalCenter dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success">{{'helpdesk.appsubmitsuccess' | translate}}</h3>
+        <!-- <h6>Your Application Number is <span class="badge badge-light-success">WH45628665456</span></h6> -->
+    </div>
+</app-ui-modal>

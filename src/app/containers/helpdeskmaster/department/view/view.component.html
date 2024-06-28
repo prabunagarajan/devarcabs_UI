@@ -1,0 +1,79 @@
+<h5 class="m-b-10 ng-star-inserted">
+    View Department</h5>
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Department</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.view' | translate}}</li>
+</ul>
+
+
+<div class="row mb-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <form autocomplete="off">
+            <app-card cardTitle="Department" class="list-panel view-panel">
+                <div class="row mb-2 pb-2">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Department Code<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{departmentObj.departmentCode}} </span>
+                    </div>
+                   
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Department<span class="float-right">:</span></label>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{departmentObj.department}} </span>
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.status' | translate}}<span class="float-right">:</span></label>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{departmentObj.status=='true'?'Active':'Inactive'}}</span>
+                    </div>
+
+                    <div class="col-sm-12"><hr style="height:2px;border-width:0;color:floralwhite;background-color:lightgray"></div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.createdby' | translate}}<span class="float-right">:</span></label>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{departmentObj.created_by}}</span>
+                    </div>
+                    
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.createdon' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{departmentObj.created_date | date:'dd/MMM/yyyy'}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Updated By<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{departmentObj.modified_by}}</span>
+                    </div>
+                   
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">Updated On<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{departmentObj.modified_date | date:'dd/MMM/yyyy'}}</span>
+                    </div>
+                </div>
+            </app-card>
+        </form>
+    </div>
+
+
+    <div class="col-12 text-right">
+        <!-- <button type="button" class="btn btn-primary mr-2"  >Submit</button> -->
+        <button type="button" class="btn btn-secondary" routerLink="/helpdeskmaster/department/list">{{'helpdesk.back' | translate}}elpdesk.back' | translate}}</button>
+    </div>
+</div>

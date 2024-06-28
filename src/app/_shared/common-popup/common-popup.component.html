@@ -1,0 +1,15 @@
+<div class="modal-header basic">
+  <h4 class="modal-title">Confirmation</h4>
+  <button type="button" class="close basic-close" aria-label="Close"  (click)="activeModal.close('')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body text-center">
+  <h6 class="text-secondary text-center">Are you sure you want to Submit?</h6>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close(true)">
+    <i class="fas fa-check"></i> Yes</button>
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close('')">
+    <i class="fas fa-times"></i> No</button>
+</div>

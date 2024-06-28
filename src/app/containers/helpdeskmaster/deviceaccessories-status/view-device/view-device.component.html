@@ -1,0 +1,69 @@
+<h5 class="m-b-10 ng-star-inserted"> {{'helpdesk.viewdeviceaccessoriesstatus' | translate}}</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="/helpdeskmaster/ticket-status/list">{{'helpdesk.viewdeviceaccessoriesstatus' | translate}}</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.view' | translate}}</li>
+</ul>
+
+
+<div class="row mb-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <form autocomplete="off">
+            <app-card cardTitle="{{'helpdesk.deviceaccessoriesstatusdetails' | translate}}" class="list-panel view-panel">
+                <div class="row mb-2 pb-2">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.deviceaccessoriesstatuscode' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj.code}} </span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.deviceaccessoriesstatus' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj.deviceAccesoriesStatus}} </span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.status' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span *ngIf="obj.status == true">Active</span>
+                        <span *ngIf="obj.status == false">InActive</span>
+                    </div>
+                    <div class="col-sm-12"><hr style="height:2px;border-width:0;color:floralwhite;background-color:lightgray"></div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.createdby' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.createdBy}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.createdon' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.createdDate |date:'dd/MMM/yyyy'}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.updatedby' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.modifiedBy}}</span>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <label class="w-100 view-label">{{'helpdesk.updatedon' | translate}}<span class="float-right">:</span></label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                        <span>{{obj?.modifiedDate |date:'dd/MMM/yyyy'}}</span>
+                    </div>
+                </div>
+            </app-card>
+        </form>
+    </div>
+
+
+    <div class="col-12 text-right">
+        <!-- <button type="button" class="btn btn-primary mr-2"  >Submit</button> -->
+        <button type="button" class="btn btn-secondary" routerLink="/helpdeskmaster/device-accessories-status/list">{{'helpdesk.back' | translate}}</button>
+    </div>
+</div>

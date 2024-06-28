@@ -1,0 +1,181 @@
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId ==''">
+    {{'helpdesk.add' | translate}} {{'helpdesk.shopcode' | translate}}
+</h5>
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId !=''">
+    {{'helpdesk.edit' | translate}} {{'helpdesk.shopcode' | translate}}
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.shopcode' | translate}}</a></li>
+
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="{{'helpdesk.shopcode' | translate}} " class="list-panel add-panel">
+            <div class="row" *ngIf="editId ==''">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>      {{'helpdesk.shopcodeaddmap' | translate}}  </label><br>
+                        <select class="form-control" name="district" [(ngModel)]="createObj['shopCode']"
+                            (change)="ChooseMethod($event.target.value)" autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option value="Add">Shop Code Add</option>
+                            <option value="Map">Shop Code Map </option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="addMethod">
+                <div class="col-xl-12">
+                    <form [formGroup]="createForm" autocomplete="off">
+                        <app-card cardTitle="{{'helpdesk.addshopcodedetails' | translate}}"  class="list-panel add-panel">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>{{'helpdesk.shopcode' | translate}} <span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" required formControlName="shopCode"
+                                            placeholder="{{'helpdesk.shopcode' | translate}}" required name="issueFromCode">
+                                        <div *ngIf="formSubmitted && createForm.get('shopCode').errors || createForm.get('shopCode').touched "
+                                            class="error-msg">
+                                            <span *ngIf="createForm.get('shopCode').errors?.required">
+                                                {{'helpdesk.shopcode' | translate}} {{'helpdesk.isrequired' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>{{'helpdesk.division' | translate}} <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" formControlName="division"
+                                            placeholder="{{'helpdesk.enter' | translate}} {{'helpdesk.division' | translate}}" required name="issueFromCode">
+
+                                        <div *ngIf="formSubmitted && createForm.get('division').errors || createForm.get('division').touched "
+                                            class="error-msg">
+                                            <span *ngIf="createForm.get('division').errors?.required">
+                                                {{'helpdesk.division' | translate}}  {{'helpdesk.isrequired' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>{{'helpdesk.state' | translate}}</label>
+                                        <select class="form-control" formControlName="state" (change)="getDistrict()">
+                                            <option value="">{{'helpdesk.select' | translate}}</option>
+                                            <option *ngFor="let data of statedropdown" value="{{data.code}}">
+                                                {{data.value}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="formSubmitted && createForm.get('state').errors || createForm.get('state').touched "
+                                            class="error-msg">
+                                            <span *ngIf="createForm.get('state').errors?.required">
+                                                {{'helpdesk.state' | translate}} {{'helpdesk.isrequired' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>{{'helpdesk.district' | translate}} </label><br>
+                                        <select class="form-control" name="district" formControlName="district"
+                                            autocomplete="off">
+                                            <option value="">{{'helpdesk.select' | translate}}</option>
+                                            <option *ngFor="let data of districtdropdown" value="{{data.code}}">
+                                                {{data.value}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="formSubmitted && createForm.get('district').errors || createForm.get('district').touched "
+                                            class="error-msg">
+                                            <span *ngIf="createForm.get('district').errors?.required">
+                                                {{'helpdesk.district' | translate}} {{'helpdesk.isrequired' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>{{'helpdesk.username' | translate}}</label><br>
+                                        <input class="form-control" list="codes" formControlName="Employee"
+                                            placeholder="{{'helpdesk.searchby' | translate}} {{'helpdesk.username' | translate}}" required>
+                                        <datalist id="codes">
+                                            <option *ngFor="let c of Fielddropdown" [value]="c.username">
+                                                {{c.username}}</option>
+                                        </datalist>
+                                        <div *ngIf="formSubmitted && createForm.get('Employee').errors || createForm.get('Employee').touched "
+                                            class="error-msg">
+                                            <span *ngIf="createForm.get('Employee').errors?.required">
+                                                {{'helpdesk.username' | translate}} {{'helpdesk.isrequired' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </app-card>
+
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="mapMethod">
+                <div class="col-xl-12">
+                    <form [formGroup]="MapForm" autocomplete="off">
+                        <app-card cardTitle="{{'helpdesk.addshopcodedetails' | translate}}" class="list-panel add-panel">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>{{'helpdesk.currentfieldengineer' | translate}}</label>
+                                
+                                        <input class="form-control" list="codes" formControlName="CurrentFE"
+                                            placeholder="{{'helpdesk.searchby' | translate}} {{'helpdesk.currentfieldengineer' | translate}}" required
+                                            (change)="SelectedFe()">
+                                        <datalist id="codes">
+                                            <option *ngFor="let c of Fielddropdown" [value]="c.username">
+                                                {{c.username}}</option>
+                                        </datalist>
+                                        <div *ngIf="formSubmittedMap && MapForm.get('CurrentFE').errors || MapForm.get('CurrentFE').touched "
+                                            class="error-msg">
+                                            <span *ngIf="MapForm.get('CurrentFE').errors?.required">
+                                                {{'helpdesk.currentfieldengineer' | translate}} {{'helpdesk.isrequired' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>{{'helpdesk.mappingto' | translate}}</label>
+                                        <input class="form-control" list="codes" formControlName="MappingFE"
+                                            placeholder="{{'helpdesk.searchby' | translate}} {{'helpdesk.mappingto' | translate}}" required>
+                                        <datalist id="codes">
+                                            <option *ngFor="let c of FielddropdownMap" [value]="c.username">
+                                                {{c.username}}</option>
+                                        </datalist>
+                                        <div *ngIf="formSubmittedMap && MapForm.get('MappingFE').errors || MapForm.get('MappingFE').touched "
+                                            class="error-msg">
+                                            <span *ngIf="MapForm.get('MappingFE').errors?.required">
+                                                {{'helpdesk.mappingto' | translate}} {{'helpdesk.isrequired' | translate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </app-card>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 text-right mb-4">
+                <button type="button" class="btn btn-primary ml-2 mb-2" *ngIf="mapMethod"
+                    (click)="MapRegistration(MapForm)">{{'helpdesk.map' | translate}}</button>
+                <button type="button" *ngIf="addMethod" class="btn btn-primary ml-2 mb-2"
+                    (click)="addRegistration(createForm)">{{'helpdesk.submit' | translate}}</button>
+                <button type="button" class="btn btn-secondary ml-2 mb-2"
+                    routerLink="/helpdeskmaster/shop-code-map/list">{{'helpdesk.cancel' | translate}}</button>
+            </div>
+        </app-card>
+    </div>
+</div>

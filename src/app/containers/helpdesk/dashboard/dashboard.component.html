@@ -1,0 +1,110 @@
+<h5 class="m-b-10 ng-star-inserted" *ngIf="role != 'DEPARTMENT'">{{'helpdesk.dashboard' | translate}} ({{currentYear}})
+</h5>
+<h5 class="m-b-10 ng-star-inserted" *ngIf="role == 'DEPARTMENT'">Complaint Ticket Dashboard ({{currentYear}})</h5>
+<h5 class="m-b-10 ng-star-inserted"></h5>
+<ul class="breadcrumb p-0">
+  <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+  <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdesk' | translate}}</a></li>
+  <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.dashboard' | translate}}</a></li>
+</ul>
+<div class="row">
+  <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+    <div class="form-group">
+      <label>Year<span class="text-danger">*</span></label>
+      <select class="form-control" required placeholder="" [(ngModel)]="createObj['Year']" #Year="ngModel" name="Year"
+        autocomplete="off" required  (change)="getDashboardcountData()">
+        <option *ngFor="let type of Yearlist" [value]="type">
+          {{type}}
+        </option>
+      </select>
+     
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+    <div class="form-group">
+      <label>Month</label>
+      <select class="form-control" required placeholder="" [(ngModel)]="createObj['month']" #Month="ngModel"
+        name="Month" autocomplete="off" required (change)="getDashboardcountData()">
+        <option *ngFor="let type of monthlist" [value]="type.id">
+          {{type.month}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6 col-12 mt-4 ">
+    <div class="form-group">
+      <button type="submit" class="btn btn-secondary" (click)="clear()">{{'helpdesk.clear'|translate}}</button>
+
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col dashboard_bg3 animate__animated animate__backInUp" (click)="navigateViewTicketStatus('All')">
+    <app-card [hidHeader]="true" cardClass="comp-card">
+      <div class="row align-items-center" (click)="navigateViewTicketStatus('All')">
+        <div class="col">
+          <span>{{'helpdesk.totaltickets' | translate}} </span>
+          <h3 class="mt-2">{{totalTicketsForTiles}}</h3>
+          <i class="fas fa-ticket-alt"></i>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col dashboard_bg1 animate__animated animate__backInUp" (click)="navigateViewTicketStatus('Open')">
+    <app-card [hidHeader]="true" cardClass="comp-card">
+      <div class="row align-items-center">
+        <div class="col">
+          <span>{{'helpdesk.opentickets' | translate}}</span>
+          <h3 class="mt-2">{{openTicketsForTiles}}</h3>
+          <i class="fas fa-envelope-open"></i>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col dashboard_bg2 animate__animated animate__backInUp" (click)="navigateViewTicketStatus('Pending')">
+    <app-card [hidHeader]="true" cardClass="comp-card">
+      <div class="row align-items-center">
+        <div class="col">
+          <span>{{'helpdesk.inprogresstickets' | translate}} </span>
+          <h3 class="mt-2">{{inprogressTicketsForTiles}}</h3>
+          <i class="fas fa-spinner"></i>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col dashboard_bg4 animate__animated animate__backInUp" (click)="navigateViewTicketStatus('Closed')">
+    <app-card [hidHeader]="true" cardClass="comp-card">
+      <div class="row align-items-center">
+        <div class="col">
+          <span>{{'helpdesk.closedtickets' | translate}} </span>
+          <h3 class="mt-2">{{closedTicketsForTiles}}</h3>
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+
+<div class="dashboard-custom-card">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 animate__animated animate__backInUp graph_box1">
+      <app-card cardTitle="{{'helpdesk.totaltickets' | translate}} (Monthly)" [options]="false">
+        <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptionsForPieChart" [export]
+          style="width: 100%; height: 400px; display: block;">
+        </highcharts-chart>
+      </app-card>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12 animate__animated animate__backInUp graph_box2">
+      <app-card cardTitle="{{'helpdesk.totalticketsbylast3months' | translate}}" [options]="false">
+        <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptionsForBarChart" [export]
+          style="width: 100%; height: 400px; display: block;">
+        </highcharts-chart>
+      </app-card>
+    </div>
+  </div>
+
+
+
+
+</div>

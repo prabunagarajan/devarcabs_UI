@@ -1,0 +1,564 @@
+<h5 class="m-b-10 ng-star-inserted"> {{'helpdesk.addhelpdeskusermanagement' | translate}}</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdesk' | translate}} </a></li>
+    <li class="breadcrumb-item"><a href="/helpdesk/user-management/list">{{'helpdesk.helpdeskusermanagement' | translate}}</a></li>
+    <li class="breadcrumb-item" *ngIf="editId ==undefined"> {{'helpdesk.add' | translate}}</li>
+    <li class="breadcrumb-item" *ngIf="editId !=undefined"> {{'helpdesk.edit' | translate}}</li>
+</ul>
+<div class="row">
+    <form [formGroup]="createForm" autocomplete="off">
+
+        <div class="col-xl-12">
+            <app-card cardTitle="{{'helpdesk.adduser' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.salutation' | translate}} <span class="text-danger">*</span></label><br>
+                            <select class="form-control" name="salutation" formControlName="salutation"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of salutationdropdown" value="{{data.code}}">
+                                    {{data.salutationname}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.salutation.invalid" class="error-msg">
+                                {{'helpdesk.salutation' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.firstname' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="firstname"
+                                placeholder="{{'helpdesk.firstname' | translate}}" name="firstname">
+                        </div>
+                        <div *ngIf="formSubmitted && f.firstname.invalid" class="error-msg">
+                            {{'helpdesk.firstname' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.middlename' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="middlename"
+                                placeholder="{{'helpdesk.middlename' | translate}}" name="middlename">
+                        </div>
+                        <div *ngIf="formSubmitted && f.middlename.invalid" class="error-msg">
+                            {{'helpdesk.middlename' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.lastname' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="lastname"
+                                placeholder="{{'helpdesk.lastname' | translate}}" name="lastname">
+                        </div>
+                        <div *ngIf="formSubmitted && f.lastname.invalid" class="error-msg">
+                            {{'helpdesk.lastname' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.username' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="username"
+                                placeholder="{{'helpdesk.username' | translate}}" name="username">
+                        </div>
+                        <div *ngIf="formSubmitted && f.username.invalid" class="error-msg">
+                            {{'helpdesk.username' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.address' | translate}} </label>
+                            <input type="text" class="form-control" formControlName="address"
+                                placeholder="{{'helpdesk.address' | translate}}" name="address">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.dateofjoining' | translate}}<span class="text-danger">*</span> </label>
+                            <input type="date" class="form-control" [min]="maxdate" formControlName="dateofjoining"
+                                placeholder="Enter Date of Joining" name="dateofjoining">
+                        </div>
+                        <div *ngIf="formSubmitted && f.dateofjoining.invalid" class="error-msg">
+                            {{'helpdesk.dateofjoining' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.emailid' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': formSubmitted && f.email.errors }" formControlName="email"
+                                placeholder="{{'helpdesk.emailid' | translate}}" name="email">
+                        </div>
+                        <div *ngIf="formSubmitted && f.email.invalid" class="error-msg">
+                            {{'helpdesk.emailid' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                        <div *ngIf="f.email.hasError('pattern')" class="error-msg">Email must be a valid email address
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.mobileno' | translate}} <span class="text-danger">*</span></label>
+                            <input type="text" [ngClass]="{ 'is-invalid': formSubmitted && f.mobileno.errors }"
+                                maxlength="10" class="form-control" formControlName="mobileno"
+                                placeholder="{{'helpdesk.mobileno' | translate}}" name="mobileno" required>
+                        </div>
+                        <div *ngIf="formSubmitted && f.mobileno.invalid" class="error-msg">
+                            {{'helpdesk.mobileno' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                        <mat-error class="error-msg" *ngIf="f.mobileno.hasError('pattern') ">Enter
+                            Valid Phone Number</mat-error>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.employeeid' | translate}} </label>
+                            <input type="text" class="form-control" disabled formControlName="employeeid"
+                                placeholder="{{'helpdesk.employeeid' | translate}}" name="employeeid">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.employmentstatus' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" name="employmentstatus" formControlName="employmentstatus"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of employmentstatusdropdown" value="{{data.key}}">
+                                    {{data.value}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('employmentstatus').errors || createForm.get('employmentstatus').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('employmentstatus').errors?.required"> {{'helpdesk.employmentstatus' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.role' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" name="role" formControlName="role" (change)="rolechange()"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of rolemasterdropdown" value="{{data.id}}">{{data.roleName}}
+                                </option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.role.invalid" class="error-msg">
+                                Role {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.designation' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" name="designation" formControlName="designation"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of designationdropdown" value="{{data.code}}">
+                                    {{data.designationName}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.designation.invalid" class="error-msg">
+                                {{'helpdesk.designation' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group mt-4">
+                            <div class="form-group d-inline">
+                                <input type="checkbox" class="checkbox d-inline" formControlName="isdepartmentasset"
+                                    placeholder=" {{'helpdesk.isdepartmentassetapplicable' | translate}}?" name="isdepartmentasset"
+                                    checked>
+                                <label> {{'helpdesk.isdepartmentassetapplicable' | translate}}? </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.devicenumber' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="deviceid"
+                                placeholder="{{'helpdesk.devicenumber' | translate}}" name="deviceid">
+                        </div>
+                    </div>
+
+                </div>
+
+            </app-card>
+        </div>
+        <div class="col-xl-12">
+            <app-card cardTitle="{{'helpdesk.shiftconfiguration' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.startdate' | translate}} <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" [min]="maxdate" formControlName="startdate"
+                                placeholder="" name="daterange">
+                        </div>
+                        <div *ngIf="formSubmitted && f.startdate.invalid" class="error-msg">
+                            {{'helpdesk.startdate' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.enddate' | translate}}<span class="text-danger">*</span></label>
+                            <input type="date" [min]="f.startdate.value" class="form-control" formControlName="enddate"
+                                placeholder="" name="daterange">
+                        </div>
+                        <div *ngIf="formSubmitted && f.enddate.invalid" class="error-msg">
+                            {{'helpdesk.enddate' | translate}} {{'helpdesk.isrequired' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.shiftconfiguration' | translate}} <span class="text-danger">*</span></label><br>
+                            <select class="form-control" name="shiftconfiguration" formControlName="shiftconfiguration"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of ShiftConfigurationdropdown" value="{{data.id}}">
+                                    {{data.configuration}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.shiftconfiguration.invalid" class="error-msg">
+                                {{'helpdesk.shiftconfiguration' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.shiftworkingdays' | translate}} <span class="text-danger">*</span></label><br>
+                            <select class="form-control" name="shiftworkingdays" formControlName="shiftworkingdays"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of shiftworkingdaysdropdown" value="{{data.id}}">
+                                    {{data.workingdays}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.shiftworkingdays.invalid" class="error-msg">
+                                {{'helpdesk.shiftworkingdays' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </app-card>
+        </div>
+
+        <div class="col-xl-12">
+            <app-card cardTitle="{{'helpdesk.worklocation' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.department' | translate}} <span class="text-danger">*</span></label><br>
+                            <select class="form-control" name="department" formControlName="department"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of departmentdropdown" value="{{data.departmentCode}}">
+                                    {{data.department}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.department.invalid" class="error-msg">
+                                {{'helpdesk.department' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.entityname' | translate}} <span class="text-danger">*</span></label><br>
+                            <select class="form-control" name="entityname" formControlName="entityname"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of entitytypenamedropdown" value="{{data.entityCode}}">
+                                    {{data.entityName}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.entityname.invalid" class="error-msg">
+                                {{'helpdesk.entityname' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.state' | translate}} <span class="text-danger">*</span></label><br>
+                            <select class="form-control" name="state" formControlName="state" autocomplete="off"
+                                (change)="getDistrict()">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of statedropdown" value="{{data.code}}">{{data.value}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.state.invalid" class="error-msg">
+                                {{'helpdesk.state' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.district' | translate}} <span class="text-danger">*</span></label><br>
+                            <select class="form-control" name="district" formControlName="district" autocomplete="off"
+                                *ngIf="!multiSelectDropdonw">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of districtdropdown" value="{{data.code}}">{{data.value}}
+                                </option>
+                            </select>
+                            <ng-multiselect-dropdown #multiSelect *ngIf="multiSelectDropdonw"
+                                [placeholder]="'Select District '" formControlName="district" [data]="datadist"
+                                [settings]="districtDropDownSettings" [disabled]="false" [(ngModel)]="selectedItemsDist"
+                                (onSelect)="onItemSelectdist($event)" (onDeSelect)="onDeSelectdist($event)"
+                                (onSelectAll)="onSelectAlldist($event)" (onDeSelectAll)="onDeSelectAlldist($event)">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="formSubmitted && f.district.invalid" class="error-msg">
+                                {{'helpdesk.district' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.reasonforupdate' | translate}}<span class="text-danger"> *</span></label><br>
+                            <select class="form-control" name="reasonforupdate" formControlName="reasonforupdate"
+                                autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of reasonforupdatedropdown" value="{{data.key}}">{{data.value}}
+                                </option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.reasonforupdate.invalid" class="error-msg">
+                                {{'helpdesk.reasonforupdate' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </app-card>
+        </div>
+
+        <div class="col-xl-12">
+            <app-card cardTitle="{{'helpdesk.backupuserdetails' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.role' | translate}} </label><br>
+                            <select class="form-control" name="backupuserrole" formControlName="backupuserrole"
+                                autocomplete="off" (change)="getuserbyrole($event)">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of rolemasterdropdown" value="{{data.id}}">{{data.roleName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.designation' | translate}} </label><br>
+                            <select class="form-control" name="backupuserdesignation"
+                                formControlName="backupuserdesignation" autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of designationdropdown" value="{{data.code}}">
+                                    {{data.designationName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.backupuser' | translate}} </label><br>
+                            <select class="form-control" name="backupuser" (change)="Backupuser($event)"
+                                formControlName="backupuser" autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of userbyroledropdown" value="{{data.id}}">{{data.username}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.employeeid' | translate}}<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" disabled name="backupuseremployeeid"
+                                formControlName="backupuseremployeeid" placeholder="{{'helpdesk.employeeid' | translate}}">
+
+                        </div>
+                    </div>
+                </div>
+            </app-card>
+            <!-- </form> -->
+        </div>
+
+        <div class="col-12 text-right mb-4">
+            <button type="button" class="btn btn-success ml-2 mb-2" *ngIf="editId !=undefined"
+                (click)="ResetPassword()">{{'helpdesk.resetpassword' | translate}}</button>
+            <button type="button" class="btn btn-primary ml-2 mb-2"
+                (click)="addRegistration(createForm)">{{'helpdesk.submit' | translate}}</button>
+            <button type="button" class="btn btn-secondary ml-2 mb-2"
+                routerLink="/helpdesk/user-management/list">{{'helpdesk.cancel' | translate}}</button>
+        </div>
+    </form>
+    <div class="col-xl-12">
+        <app-card cardTitle="Grievance  Assign Field" class="list-panel add-panel" *ngIf="role=='Handling Officer'">
+            <form [formGroup]="GrievanceAssignformGroup">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label> {{'helpdesk.assigngroup' | translate}}<span class="text-danger">*</span></label>
+                            <select class="form-control" name="role" disabled formControlName="role" autocomplete="off">
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of Assignto" value="{{data.id}}">{{data.roleName}}
+                                </option>
+                            </select>
+                            <div *ngIf="formSubmitted && f.role.invalid" class="error-msg">
+                                {{'helpdesk.assigngroup' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>{{'helpdesk.assignto' | translate}}</label><br>
+                        <ng-multiselect-dropdown #multiSelect [placeholder]="'Select Assign To'"
+                            [(ngModel)]="selectedItems" [data]="data" [settings]="settings" [disabled]="false"
+                            [ngModelOptions]="{standalone: true}" (onFilterChange)="onFilterChange($event)"
+                            (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-lg-3" style="margin-top: 26px;">
+                        <button type="button" class="btn btn-primary ml-2 " (click)="addAssignTO()">{{'helpdesk.submit' | translate}}</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="table-responsive text-center">
+
+                        <div class="example-table-container">
+                            <table mat-table [dataSource]="dataSourceAssignList" matSort class="example-table">
+                                <ng-container matColumnDef="position">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        {{'helpdesk.sNo' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row;let i = index">
+                                        {{i
+                                        +(paginator.pageIndex *
+                                        paginator.pageSize) +
+                                        1}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="username">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.username' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        {{row.username}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="employeeId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'helpdesk.employeeid' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        {{row.employeeId}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="emailId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.emailid' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        {{row.emailId}}
+                                    </td>
+                                </ng-container>
+
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsAssignlist">
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsAssignlist;"
+                                    [style.cursor]="'pointer'">
+                                </tr>
+                            </table>
+                            <mat-error *ngIf="dataSourceAssignList.filteredData.length == 0" class="text-center"
+                                style="font-size: 20px;">
+                                <b>
+                                    <span>No Records Found
+                                    </span>
+                                </b>
+                            </mat-error>
+                        </div>
+                        <!-- [pageSize]="itemsPerPagelicense" [pageIndex]="tablePageIndexlicense" -->
+                        <mat-paginator class="mat-paginator-sticky" [length]="dataSourceAssignList.filteredData.length"
+                            [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
+            </div>
+
+        </app-card>
+    </div>
+
+</div>
+
+
+
+<app-ui-modal #exampleModalCenter dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success">{{'helpdesk.appsubmitsuccess' | translate}}</h3>
+    </div>
+</app-ui-modal>
+
+
+<!-- Email Verification -->
+<div class="modal fade" id="emailOtpModal" tabindex="-1" role="dialog" aria-labelledby="emailOtpModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emailOtpModalLabel">Verify OTP</h5>
+                <button type="button" #emailCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label>OTP sent to Email </label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Enter OTP">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning">Resend</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile number Verification -->
+<div class="modal fade" id="mobileNumberOtpModal" tabindex="-1" role="dialog"
+    aria-labelledby="mobileNumberOtpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mobileNumberOtpModalLabel">Verify OTP</h5>
+                <button type="button" #mobileNumberCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label>OTP sent to Mobile Number </label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-phone fa-rotate-90"
+                                            aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Enter OTP">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning">Resend</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+::ng-deep div.mat-sort-header-container {
+  justify-content: center !important;
+}
+
+
+.example-table-container {
+  .mat-error {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mat-table {
+    width: 100%;
+    td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+      padding: 10px;
+    }
+
+    th, td {
+      &.mat-header-cell {
+        font-size: medium;
+        font-weight: 700;
+      }
+      border: 1px solid #e3eaef;
+      font-family: Roboto, "Helvetica Neue", sans-serif !important;
+      text-align: center !important;
+    }
+    .mat-header-row {
+      background: #f4f4f4;
+      color: #535763;
+    }
+  }
+}
+
+.download-button-container {
+  float: left;
+  position: relative;
+  bottom: 55px;
+}

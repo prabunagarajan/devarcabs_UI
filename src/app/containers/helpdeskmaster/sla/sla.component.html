@@ -1,0 +1,332 @@
+<h5 class="m-b-10 ng-star-inserted">
+    {{'helpdesk.sla' | translate}}
+    <button type="submit" class="btn btn-success pull-right custom_add_button" routerLink='/helpdeskmaster/sla/add'>
+        <i class="feather icon-plus mr-2"></i>
+        {{'helpdesk.addsla' | translate}}
+    </button>
+</h5>
+
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:"> {{'helpdesk.sla' | translate}}</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.list' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <form #searchForm="ngForm">
+        <app-card cardTitle="{{'helpdesk.search' | translate}}" class="search-panel">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label> {{'helpdesk.category' | translate}} </label>
+                        <select class="form-control" name="category" #category="ngModel"
+                            [(ngModel)]="searchList['category']" autocomplete="off" (change)="getsub()" >
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option *ngFor="let data of cat" value="{{data.id}}">{{data.categoryName}}</option>
+                        </select>
+                   
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label> {{'helpdesk.subcategory' | translate}} </label>
+                        <select class="form-control" name="subCategory" #subCategory="ngModel"
+                            [(ngModel)]="searchList['subCategory']" autocomplete="off"  (change)="getissueDetailsService();" >
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option *ngFor="let data of sub" value="{{data.id}}">{{data.subcategoryName}}</option>
+                        </select>
+                 
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>{{'helpdesk.issuedetails' | translate}}</label>
+                        <select class="form-control"    name="issue" #issue="ngModel" [(ngModel)]="searchList['issue']"
+                            autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option *ngFor="let data of issuedropdown" value="{{data.id}}">{{data.issueName}}</option>
+                        </select>
+                       
+                    </div>
+                </div>
+
+                <div class="col-12 text-right">
+
+                    <button type="button" class="btn btn-primary mr-2" (click)="search();">{{'helpdesk.search' | translate}}</button>
+                    <button type="button" class="btn btn-secondary" (click)="clearfilter();">{{'helpdesk.clear' | translate}}</button>
+
+                </div>
+            </div>
+        </app-card>
+    </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="{{'helpdesk.slalist' | translate}}" blockClass="table-border-style" class="list-panel">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="table-responsive text-center" *ngIf="!searchmethod">
+
+                        <div class="example-table-container">
+                            <table mat-table [dataSource]="dataSource" matSort class="example-table">
+                                <ng-container matColumnDef="position">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        {{'helpdesk.sNo' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row;let i = index">
+                                        {{i + (paginator.pageIndex * paginator.pageSize) + 1}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="priority">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.priority' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.priority}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="issueDetails">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.issuedetails' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.issueDetails}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="sla">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.sla' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.sla}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="categoryName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.category' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.categoryName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="subCategoryName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.subcategory' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.subCategoryName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="createdBy">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.createdby' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.createdBy}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="createdDate">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.createdon' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.createdDate | date: 'medium'}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="modifiedBy">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.Modifiedby' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.modifiedBy}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="modifiedDate">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.Modifiedon' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.modifiedDate | date: 'medium'}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="active">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                   {{'helpdesk.status' | translate}}
+                                      
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <span class="badge m-r-5 badge-light-success" *ngIf="row.active">Active</span>
+                                        <span class="badge m-r-5 badge-light-danger" *ngIf="!row.active">Inactive</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.action' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <button class="btn btn-icon btn-primary mr-2" type="button"
+                                            (click)="navigateView(row.id)">
+                                            <i class="feather icon-eye"></i></button>
+                                        <button class="btn btn-icon btn-secondary mr-2" type="button"
+                                            (click)="navigateEdit(row.id)">
+                                            <i class="feather icon-edit"></i></button>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="ticketListDisplayedColumns">
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: ticketListDisplayedColumns;"
+                                    [style.cursor]="'pointer'">
+                                </tr>
+                            </table>
+                            <mat-error *ngIf="dataSource.filteredData.length == 0" class="text-center"
+                                style="font-size: 20px;">
+                                <b>
+                                    <span>{{'helpdesk.norecordsfound' | translate}}
+                                    </span>
+                                </b>
+                            </mat-error>
+                        </div>
+                        <mat-paginator class="mat-paginator-sticky" #paginator [length]="totalRecords"
+                            [pageSize]="itemsPerPage" [pageIndex]="tablePageIndex" [pageSizeOptions]="[10, 20, 30]"
+                            (page)="onPageChange($event)" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                    <div class="table-responsive text-center" *ngIf="searchmethod">
+
+                        <div class="example-table-container">
+                            <table mat-table [dataSource]="dataSource" matSort class="example-table">
+                                <ng-container matColumnDef="position">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        {{'helpdesk.sNo' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row;let i = index">
+                                        {{i + (paginator.pageIndex * paginator.pageSize) + 1}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="priority">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.priority' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.priority}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="issueDetails">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.issuedetails' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.issueDetails}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="sla">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.sla' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.sla}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="categoryName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.category' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.categoryName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="subCategoryName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.subcategory' | translate}}
+
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.subCategoryName}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="createdBy">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.createdby' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.createdBy}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="createdDate">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.createdon' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.createdDate | date: 'medium'}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="modifiedBy">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.Modifiedby' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.modifiedBy}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="modifiedDate">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.Modifiedon' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">{{row.modifiedDate | date: 'medium'}}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="active">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                       {{'helpdesk.status' | translate}}
+                                        
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <span class="badge m-r-5 badge-light-success" *ngIf="row.active">Active</span>
+                                        <span class="badge m-r-5 badge-light-danger" *ngIf="!row.active">Inactive</span>
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        {{'helpdesk.action' | translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <button class="btn btn-icon btn-primary mr-2" type="button"
+                                            (click)="navigateView(row.id)">
+                                            <i class="feather icon-eye"></i></button>
+                                        <button class="btn btn-icon btn-secondary mr-2" type="button"
+                                            (click)="navigateEdit(row.id)">
+                                            <i class="feather icon-edit"></i></button>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="ticketListDisplayedColumns">
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: ticketListDisplayedColumns;"
+                                    [style.cursor]="'pointer'">
+                                </tr>
+                            </table>
+                            <mat-error *ngIf="dataSource.filteredData.length == 0" class="text-center"
+                                style="font-size: 20px;">
+                                <b>
+                                    <span>{{'helpdesk.norecordsfound' | translate}}
+                                    </span>
+                                </b>
+                            </mat-error>
+                        </div>
+                        <mat-paginator class="mat-paginator-sticky" #paginator [length]="totalRecords"
+                            [pageSize]="itemsPerPagesearch" [pageIndex]="tablePageIndexsearch"
+                            [pageSizeOptions]="[10, 20, 30]" (page)="onPageChange($event)" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 mt-2">
+                    <div ngbDropdown>
+                        <button *ngIf="list?.length != 0 && list?.length != undefined " class="btn btn-success"
+                      type="button" (click)="export()">{{'helpdesk.download' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

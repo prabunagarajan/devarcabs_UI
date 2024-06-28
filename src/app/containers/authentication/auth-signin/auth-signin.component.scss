@@ -1,0 +1,13 @@
+.error-msg{
+    color: red;
+    text-align: justify;
+}
+iframe, video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+}
+::-webkit-media-controls {
+    display:none !important;
+}

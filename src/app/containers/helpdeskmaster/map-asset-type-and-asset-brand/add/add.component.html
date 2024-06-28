@@ -1,0 +1,103 @@
+<!-- <h5 class="m-b-10 ng-star-inserted"> Add Asset Type And Asset Brand</h5>
+ -->
+ <h5 class="m-b-10 ng-star-inserted" *ngIf="editId ==''">
+    {{'helpdesk.addmapassettypeandassetbrand' | translate}}
+</h5>
+<h5 class="m-b-10 ng-star-inserted" *ngIf="editId !=''">
+    {{'helpdesk.editmapassettypeandassetbrand' | translate}}
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="/helpdeskmaster/map-asset-type-and-asset-brand/list">{{'helpdesk.mapassettypeandassetbrand' | translate}}
+            Brand</a></li>
+            <li *ngIf="editId" class="breadcrumb-item"><a href="javascript:"></a> {{'helpdesk.edit' | translate}}</li>
+            <li *ngIf="editId == undefined" class="breadcrumb-item"><a href="javascript:"></a>{{'helpdesk.add' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <form [formGroup]="createForm" autocomplete="off">
+            <app-card cardTitle="{{'helpdesk.mapassettypeandassetbrand' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.brandcode' | translate}}</label>
+                            <input type="text" class="form-control" readonly formControlName="brandCode"
+                                placeholder="22CCFV" name="brandCode">
+                            <!-- <div *ngIf="formSubmitted && createForm.get('slaCode').errors || createForm.get('slaCode').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('slaCode').errors?.required">
+                                    SLA Code Code {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.assettype' | translate}}<span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="assetType" autocomplete="off" required>
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of dropdown" value="{{data.id}}">{{data.type}}</option>
+                            </select>
+                            <div *ngIf="formSubmitted &&  f.assetType.invalid " class="error-msg">
+                                <!-- <span *ngIf="createForm.get('status').errors?.required"> -->
+                                    {{'helpdesk.assettype' | translate}}e {{'helpdesk.isrequired' | translate}}
+                                <!-- </span> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.assetbrand' | translate}}<span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="assetBrand" autocomplete="off" required>
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option *ngFor="let data of dropdowngetbrand" value="{{data.id}}">{{data.brand}}
+                                </option>
+                            </select>
+                            <div *ngIf="formSubmitted &&  f.assetBrand.invalid " class="error-msg">
+                                <!-- <span *ngIf="createForm.get('status').errors?.required"> -->
+                                    {{'helpdesk.assetbrand' | translate}} {{'helpdesk.isrequired' | translate}}
+                                <!-- </span> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.status' | translate}} <span class="text-danger">*</span></label>
+                            <select name="status" formControlName="Status" class="form-control" required>
+                                <option value="">{{'helpdesk.select' | translate}}</option>
+                                <option value=true>Active</option>
+                                <option value=false>Inactive</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('Status').errors || createForm.get('Status').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('Status').errors?.required">
+                                    {{'helpdesk.status' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+           
+                    </div>
+                </div>
+
+            </app-card>
+        </form>
+    </div>
+    <div class="col-12 text-right mb-4">
+        <button type="button" class="btn btn-primary ml-2 mb-2" (click)="addRegistration(createForm)">{{'helpdesk.submit' | translate}}</button>
+        <button type="button" class="btn btn-secondary ml-2 mb-2"
+            routerLink="/helpdeskmaster/map-asset-type-and-asset-brand/list">{{'helpdesk.cancel' | translate}}</button>
+    </div>
+</div>
+<app-ui-modal #exampleModalCenter dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success">{{'helpdesk.appsubmitsuccess' | translate}}</h3>
+        <!-- <h6>Your Application Number is <span class="badge badge-light-success">WH45628665456</span></h6> -->
+    </div>
+</app-ui-modal>

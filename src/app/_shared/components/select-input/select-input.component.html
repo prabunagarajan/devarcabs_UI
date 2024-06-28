@@ -1,0 +1,12 @@
+<div class="form-group">
+    <label>{{eleName}}</label>
+    <select class="form-control" [formControlName]="control">
+        <option value="">Select</option>
+        <option *ngFor="let item of dataArr" value={{item.id}}>{{item.stateName}}</option>
+    </select>
+    <app-show-errors 
+        [eleName]="eleName" 
+        [frmSub]="frmSub"
+        [control]="control">
+    </app-show-errors>
+</div>

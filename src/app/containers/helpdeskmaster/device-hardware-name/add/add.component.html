@@ -1,0 +1,81 @@
+<h5 *ngIf="editId" class="m-b-10 ng-star-inserted">
+  {{'helpdesk.edit' | translate}} {{'helpdesk.assetname' | translate}}
+</h5>
+<h5 *ngIf="editId == ''" class="m-b-10 ng-star-inserted">
+  {{'helpdesk.add' | translate}} {{'helpdesk.assetname' | translate}}
+</h5>
+<ul class="breadcrumb p-0">
+  <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+  <li class="breadcrumb-item"><a href="javascript:"> {{'helpdesk.helpdeskmaster' | translate}} </a></li>
+  <li class="breadcrumb-item"><a href="/helpdeskmaster/device-hardware-name/list">{{'helpdesk.assetname' |
+      translate}}</a></li>
+  <li *ngIf="editId" class="breadcrumb-item"><a href="javascript:"></a> {{'helpdesk.edit' | translate}}</li>
+  <li *ngIf="editId == ''" class="breadcrumb-item"><a href="javascript:"></a>{{'helpdesk.add' | translate}}</li>
+
+</ul>
+<div class="row">
+  <div class="col-xl-12">
+
+    <app-card cardTitle="  {{'helpdesk.assetname' | translate}}   {{'helpdesk.details' | translate}}"
+      class="list-panel add-panel">
+      <form [formGroup]="createForm" autocomplete="off">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+            <div class="form-group">
+              <label> {{'helpdesk.assettype' | translate}}<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="assetType" autocomplete="off" required>
+                <option value=""> {{'helpdesk.select' | translate}}</option>
+                <option *ngFor="let data of dropdown" value="{{data.type}}">{{data.type}}</option>
+              </select>
+              <div *ngIf="formSubmitted &&  f.assetType.invalid " class="error-msg">
+
+                {{'helpdesk.assettype' | translate}} {{'helpdesk.isrequired' | translate}}
+
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+            <div class="">
+              <label> {{'helpdesk.assetname' | translate}} <span class="text-danger">*</span></label>
+              <input type="text" maxlength="50" class="form-control" formControlName="deviceNameHardwareName"
+                placeholder=" {{'helpdesk.enter' | translate}} {{'helpdesk.assetname' | translate}}"
+                name="firstname">
+            </div>
+            <div *ngIf="formSubmitted && f.deviceNameHardwareName.invalid" class="error-msg">
+              {{'helpdesk.assetname' | translate}} {{'helpdesk.isrequired' | translate}}
+              <div *ngIf="f.deviceNameHardwareName.errors?.maxlength">Asset Name Name cannot exceed 50 characters</div>
+
+
+            </div>
+          </div>
+
+
+
+          <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+            <div class="form-group">
+              <label> {{'helpdesk.status' | translate}} <span class="text-danger">*</span></label>
+              <select name="status" formControlName="status" class="form-control" required>
+                <option value=""> {{'helpdesk.select' | translate}}</option>
+                <option value=true>Active</option>
+                <option value=false>Inactive</option>
+              </select>
+              <div *ngIf="formSubmitted && createForm.get('status').errors || createForm.get('status').touched "
+                class="error-msg">
+                <span *ngIf="createForm.get('status').errors?.required">
+                  {{'helpdesk.status' | translate}} {{'helpdesk.isrequired' | translate}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-right mb-4">
+          <button type="submit" class="btn btn-primary ml-2 mb-2" (click)="addRegistration(createForm)">
+            {{'helpdesk.submit' | translate}}</button>
+          <button type="button" class="btn btn-secondary ml-2 mb-2"
+            routerLink="/helpdeskmaster/device-hardware-name/list">{{'helpdesk.cancel' | translate}}</button>
+        </div>
+
+      </form>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<h5 *ngIf="editId" class="m-b-10 ng-star-inserted">
+    {{'helpdesk.edit' | translate}}  {{'helpdesk.entitytype' | translate}}
+</h5>
+<h5 *ngIf="editId == undefined" class="m-b-10 ng-star-inserted">
+    {{'helpdesk.add' | translate}}  {{'helpdesk.entitytype' | translate}}
+</h5><ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="/helpdeskmaster/entitytype/list">{{'helpdesk.entitytype' | translate}}</a></li>
+     <li *ngIf="editId" class="breadcrumb-item"><a href="javascript:"></a> {{'helpdesk.edit' | translate}}</li>
+    <li *ngIf="editId == undefined" class="breadcrumb-item"><a href="javascript:"></a>{{'helpdesk.add' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-xl-12">
+        <form [formGroup]="createForm" autocomplete="off">
+            <app-card cardTitle="{{'helpdesk.entitytype' | translate}}" class="list-panel add-panel">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.entitycode' | translate}}</label>
+                            <input type="text" class="form-control"  formControlName="entityCode" required
+                            placeholder="{{'helpdesk.enter' | translate}} {{'helpdesk.entitycode' | translate}}"     name="brandCode">
+                            <div *ngIf="formSubmitted && createForm.get('entityCode').errors || createForm.get('entityCode').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('entityCode').errors?.required">
+                                    {{'helpdesk.entitycode' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.entityname' | translate}}<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="entityName"
+                                placeholder="{{'helpdesk.enter' | translate}} {{'helpdesk.entityname' | translate}}" name="entityName" required>
+                            <!-- <option *ngFor="let item of problem" value="{{item.id}}">{{item.actualProblem}}</option> -->
+                            <div *ngIf="formSubmitted && createForm.get('entityName').errors || createForm.get('entityName').touched "
+                                class="error-msg">
+                                <span *ngIf="createForm.get('entityName').errors?.required">
+                                    {{'helpdesk.entityname' | translate}} {{'helpdesk.isrequired' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>   {{'helpdesk.entity' | translate}} /   {{'helpdesk.others' | translate}}  <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="entityOrOthers" required name="entity">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option value="entity">Entity</option>
+                            <option value="others">Others</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('entityOrOthers').errors || createForm.get('entityOrOthers').touched " class="error-msg">
+                                <span *ngIf="createForm.get('entityOrOthers').errors?.required">
+                                    {{'helpdesk.entity' | translate}} /   {{'helpdesk.others' | translate}}  {{'helpdesk.isrequired' | translate}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>{{'helpdesk.status' | translate}} <span class="text-danger">*</span></label>
+                            <select class="form-control" formControlName="status" required name="active">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option value="true">Active</option>
+                            <option value="false">InActive</option>
+                            </select>
+                            <div *ngIf="formSubmitted && createForm.get('status').errors || createForm.get('status').touched " class="error-msg">
+                                <span *ngIf="createForm.get('status').errors?.required">
+                                {{'helpdesk.status' | translate}} {{'helpdesk.isrequired' | translate}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </app-card>
+        </form>
+    </div>
+    <div class="col-12 text-right mb-4">
+        <button type="button" class="btn btn-primary ml-2 mb-2"
+            (click)="submit(createForm)">   {{'helpdesk.submit' | translate}} </button>
+
+        <button type="button" class="btn btn-secondary ml-2 mb-2"
+            routerLink="/helpdeskmaster/entity-type/list">{{'helpdesk.cancel' | translate}}</button>
+    </div>
+</div>
+<app-ui-modal #exampleModalCenter dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success">{{'helpdesk.appsubmitsuccess' | translate}}</h3>
+        <!-- <h6>Your Application Number is <span class="badge badge-light-success">WH45628665456</span></h6> -->
+    </div>
+</app-ui-modal>

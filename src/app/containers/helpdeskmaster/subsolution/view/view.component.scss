@@ -1,0 +1,30 @@
+.primary {
+    background: #4680ff;
+    color: #fff;
+  }
+  .secondary {
+    background: #fff;
+    color: #333;
+  }
+  #tab1 {
+      display: none;
+  }
+  #tab2 {
+    display: none;
+}
+.stepper {
+  .line {
+    width: 2px;
+    background-color: lightgrey !important;
+  }
+  .lead {
+    font-size: 1.1rem;
+  }
+}
+.border-primary {
+  border-color: #007bff!important;
+  border-radius: 0px !important;
+}
+.card-body{
+  min-width: 40rem !important;
+}

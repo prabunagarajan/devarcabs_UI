@@ -1,0 +1,215 @@
+<h5 class="m-b-10 ng-star-inserted">
+    Asset Assign
+    <button type="submit" class="btn btn-success pull-right custom_add_button"
+        routerLink='/helpdeskmaster/asset-assign/add'>
+        <i class="feather icon-plus mr-2"></i>
+        Add Asset Assign
+    </button>
+</h5>
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.helpdeskmaster' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:"> Asset Assign</a></li>
+    <li class="breadcrumb-item">{{'helpdesk.list' | translate}}</li>
+</ul>
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+        <div class="form-group">
+            <input type="date" class="form-control" autocomplete="off">
+            <!-- <option *ngFor="let data of cat" value="{{data.id}}">{{data.categoryName}}</option> -->
+            <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="{{'helpdesk.search' | translate}}" class="search-panel">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Deivce Name/Hardware Name</label>
+                        <select class="form-control" name="deviceName" #deviceName="ngModel"
+                            [(ngModel)]="searchList['deviceName']" autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <!-- <option *ngFor="let data of cat" value="{{data.id}}">{{data.categoryName}}</option> -->
+                        </select>
+                        <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Warrenty</label><br>
+                        <label class="switch">
+                            <input type="checkbox" class="form-control" style="margin-top: 20px !important;"
+                                [(ngModel)]="searchList['warrenty']" name="warrenty" #warrenty="ngModel" required>
+                            <span class="slider round"></span>
+                        </label>
+                        <label><span style="width: px;">{{searchList['warrenty'] ? "off" : "In"}}</span></label>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label> Role Name</label>
+                        <select class="form-control" name="roleName" #roleName="ngModel"
+                            [(ngModel)]="searchList['roleName']" autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <!-- <option *ngFor="let data of cat" value="{{data.id}}">{{data.categoryName}}</option> -->
+                        </select>
+                        <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label> Assign To</label>
+                        <select class="form-control" name="assignee" #assignee="ngModel"
+                            [(ngModel)]="searchList['assignee']" autocomplete="off">
+                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <!-- <option *ngFor="let data of cat" value="{{data.id}}">{{data.categoryName}}</option> -->
+                        </select>
+                        <!-- input type="text" appInputRestriction class="form-control" placeholder="Enter Action Taken"> -->
+                    </div>
+                </div>
+
+                <div class="col-12 text-right">
+
+                    <button type="submit" class="btn btn-primary mr-2">{{'helpdesk.search' | translate}}</button>
+                    <button type="submit" class="btn btn-secondary">Clear</button>
+
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="Asset Assign List" blockClass="table-border-style" class="list-panel">
+            <ngb-tabset type="pills">
+                <ngb-tab title="Pending Asset Request" class="mb-3">
+                    <ng-template ngbTabContent>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" datatable [dtOptions]="dtOptions"
+                                [dtTrigger]="dtTrigger">
+                                <thead>
+                                    <tr>
+                                        <th>{{'helpdesk.sNo' | translate}}</th>
+                                        <th>Device Name/Hardware Name</th>
+                                        <th>License Name</th>
+                                        <th>License No</th>
+                                        <th>License Type</th>
+                                        <th>Entity Name</th>
+                                        <th>Location</th>
+                                        <th>No of devices requested</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="list?.length != 0">
+                                    <tr *ngFor="let data of list;let i=index">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="table-action-column text-center">
+                                            <button class="btn btn-icon btn-primary mr-2" type="button"
+                                                (click)="navigateView(data.id)">
+                                                <i class="feather icon-eye"></i></button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 mt-2">
+                                <div ngbDropdown>
+                                    <button class="btn btn-success" ngbDropdownToggle type="button">{{'helpdesk.download' | translate}}</button>
+                                    <div ngbDropdownMenu>
+                                        <a class="dropdown-item" (click)="getPdfData1('downloadExcel')"
+                                            href="javascript:">{{ 'sugarmill.common.excel' | translate }}</a>
+                                        <a class="dropdown-item" (click)="getPdfData1('downloadPdf')"
+                                            href="javascript:">{{ 'sugarmill.common.pdf' | translate }}</a>
+                                        <a class="dropdown-item" (click)="getPdfData1('downloadCsv')"
+                                            href="javascript:">{{ 'sugarmill.common.jpg' | translate }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Approved Assets details">
+                    <ng-template ngbTabContent>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" datatable [dtOptions]="dtOptions"
+                                [dtTrigger]="dtTrigger">
+                                <thead>
+                                    <tr>
+                                        <th>{{'helpdesk.sNo' | translate}}</th>
+                                        <th>Device Name/Hardware Name</th>
+                                        <th>Device ID/Model</th>
+                                        <th>Made-In</th>
+                                        <th>IMEI No/Serial No</th>
+                                        <th>Warrenty</th>
+                                        <th>License Name</th>
+                                        <th>License No</th>
+                                        <th>License Type</th>
+                                        <th>Entity Name</th>
+                                        <th>Location</th>
+                                        <th>No of devices requested</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="list?.length != 0">
+                                    <tr *ngFor="let data of list;let i=index">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="table-action-column text-center">
+                                            <button class="btn btn-icon btn-primary mr-2" type="button"
+                                                (click)="navigateView(data.id)">
+                                                <i class="feather icon-eye"></i></button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 mt-2">
+                                <div ngbDropdown>
+                                    <button class="btn btn-success" ngbDropdownToggle type="button">{{'helpdesk.download' | translate}}</button>
+                                    <div ngbDropdownMenu>
+                                        <a class="dropdown-item" (click)="getPdfData1('downloadExcel')"
+                                            href="javascript:">{{ 'sugarmill.common.excel' | translate }}</a>
+                                        <a class="dropdown-item" (click)="getPdfData1('downloadPdf')"
+                                            href="javascript:">{{ 'sugarmill.common.pdf' | translate }}</a>
+                                        <a class="dropdown-item" (click)="getPdfData1('downloadCsv')"
+                                            href="javascript:">{{ 'sugarmill.common.jpg' | translate }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </app-card>
+    </div>
+</div>
