@@ -120,6 +120,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "host": "192.168.2.165",
             "browserTarget": "up-excise:build"
           },
           "configurations": {
@@ -184,4 +185,5 @@
   "cli": {
     "analytics": "36de0c4e-ea7e-4c65-8586-f8992cb7c4dc"
   }
+
 }
