@@ -1,13 +1,13 @@
 <h5 *ngIf="editId" class="m-b-10 ng-star-inserted">
-    {{'helpdesk.edit' | translate}} {{'helpdesk.DriverDetails' | translate}}
+    Edit DriverDetails
 </h5>
 <h5 *ngIf="editId == undefined" class="m-b-10 ng-star-inserted">
-    {{'helpdesk.add' | translate}} {{'helpdesk.DriverDetails' | translate}}
+    Add DriverDetails
 </h5>
 <ul class="breadcrumb p-0">
     <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.DevarCabsmaster' | translate}}</a></li>
-    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.DriverDetails' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">DevarCabsmaster</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">DriverDetails</a></li>
     <li *ngIf="editId" class="breadcrumb-item"><a href="javascript:"></a> {{'helpdesk.edit' | translate}}</li>
     <li *ngIf="editId == undefined" class="breadcrumb-item"><a href="javascript:"></a>{{'helpdesk.add' | translate}}
     </li>
@@ -16,8 +16,7 @@
 <form [formGroup]="createForm" autocomplete="off">
 
     <div class="col-xl-12">
-        <app-card cardTitle="{{'helpdesk.DriverDetails' | translate}}" blockClass="table-border-style"
-            class="list-panel add-panel list-search">
+        <app-card cardTitle="Driver Details" blockClass="table-border-style" class="list-panel add-panel list-search">
             <div class="row">
                 <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
@@ -27,10 +26,10 @@
                 </div> -->
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.name' | translate}} <span class="text-danger">*</span></label>
+                        <label>Name <span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="name"
-                            formControlName="name" placeholder="{{'helpdesk.name' | translate}}">
-                        <div *ngIf="createForm.controls['name'].invalid && formSubmitted || createForm.controls['name'].touched"
+                            formControlName="name" placeholder="Enter Name">
+                        <div *ngIf="createForm.controls['name'].invalid && (formSubmitted || createForm.controls['name'].touched)"
                             class="text-danger">
                             <span>
                                 <i class="fa fa-times"></i> Name is Required
@@ -40,92 +39,165 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.mobileNumber' | translate}} <span class="text-danger">*</span></label>
+                        <label>Mobile Number <span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="mobileNumber"
-                            formControlName="mobileNumber" placeholder="{{'helpdesk.mobileNumber' | translate}}">
+                            formControlName="mobileNumber" placeholder="Enter Mobile Number">
+                        <div *ngIf="createForm.controls['mobileNumber'].invalid && (formSubmitted || createForm.controls['mobileNumber'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> Mobile Number is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.drivingLicenseNumber' | translate}} <span
-                                class="text-danger">*</span></label>
+                        <label>Driving License Number <span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="drivingLicenseNumber"
                             formControlName="drivingLicenseNumber"
-                            placeholder="{{'helpdesk.drivingLicenseNumber' | translate}}">
+                            placeholder="Enter Driving License Number">
+                        <div *ngIf="createForm.controls['drivingLicenseNumber'].invalid && (formSubmitted || createForm.controls['drivingLicenseNumber'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> Driving License Number is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.aadharNumber' | translate}} <span class="text-danger">*</span></label>
+                        <label>Aadhar Number <span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="aadharNumber"
-                            formControlName="aadharNumber" placeholder="{{'helpdesk.aadharNumber' | translate}}">
+                            formControlName="aadharNumber" placeholder="Enter Aadhar Number">
+                        <div *ngIf="createForm.controls['aadharNumber'].invalid && (formSubmitted || createForm.controls['aadharNumber'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> Aadhar Number is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.doorNumber' | translate}} <span class="text-danger">*</span></label>
+                        <label>Door Number <span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="doorNumber"
-                            formControlName="doorNumber" placeholder="{{'helpdesk.doorNumber' | translate}}">
+                            formControlName="doorNumber" placeholder="Enter Door Number">
+                        <div *ngIf="createForm.controls['doorNumber'].invalid && (formSubmitted || createForm.controls['doorNumber'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> Door Number is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.street' | translate}} <span class="text-danger">*</span></label>
+                        <label>Street <span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="street"
-                            formControlName="street" placeholder="{{'helpdesk.street' | translate}}">
+                            formControlName="street" placeholder="Enter Street">
+                        <div *ngIf="createForm.controls['street'].invalid && (formSubmitted || createForm.controls['street'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> Street is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.villageOrCity' | translate}} <span class="text-danger">*</span></label>
+                        <label>Village Or City <span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="villageOrCity"
-                            formControlName="villageOrCity" placeholder="{{'helpdesk.villageOrCity' | translate}}">
+                            formControlName="villageOrCity" placeholder="Enter Village Or City">
+                        <div *ngIf="createForm.controls['villageOrCity'].invalid && (formSubmitted || createForm.controls['villageOrCity'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> Village Or City is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.district' | translate}} <span class="text-danger">*</span></label>
+                        <label>District<span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="district"
-                            formControlName="district" placeholder="{{'helpdesk.district' | translate}}">
+                            formControlName="district" placeholder="Enter District">
+                        <div *ngIf="createForm.controls['district'].invalid && (formSubmitted || createForm.controls['district'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> District is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.state' | translate}} <span class="text-danger">*</span></label>
+                        <label>State<span class="text-danger">*</span></label>
                         <input type="text" appInputRestriction required class="form-control" name="state"
-                            formControlName="state" placeholder="{{'helpdesk.state' | translate}}">
+                            formControlName="state" placeholder="Enter State">
+                        <div *ngIf="createForm.controls['state'].invalid && (formSubmitted || createForm.controls['state'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> State is Required
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>County<span class="text-danger">*</span></label>
+                        <input type="text" appInputRestriction required class="form-control" name="county"
+                            formControlName="county" placeholder="Enter County">
+                        <div *ngIf="createForm.controls['county'].invalid && (formSubmitted || createForm.controls['county'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> County is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.county' | translate}} <span class="text-danger">*</span></label>
-                        <input type="text" appInputRestriction required class="form-control" name="county"
-                            formControlName="county" placeholder="{{'helpdesk.county' | translate}}">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label>{{'helpdesk.isPermanentDriver' | translate}} <span
-                                class="text-danger">*</span></label><br>
+                        <label>is Permanent Driver<span class="text-danger">*</span></label><br>
                         <select class="form-control" formControlName="isPermanentDriver" required
                             name="isPermanentDriver">
                             <option value="">{{'helpdesk.select' | translate}}</option>
                             <option value="true">YES</option>
                             <option value="false">NO</option>
                         </select>
+                        <div *ngIf="createForm.controls['isPermanentDriver'].invalid && (formSubmitted || createForm.controls['isPermanentDriver'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> is Permanent Driver is
+                                Required
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                     <div class="form-group">
-                        <label>{{'helpdesk.status' | translate}} <span class="text-danger">*</span></label><br>
+                        <label>Status<span class="text-danger">*</span></label><br>
                         <select class="form-control" formControlName="status" required name="status">
-                            <option value="">{{'helpdesk.select' | translate}}</option>
+                            <option value="">{{'helpdesk.select' | translate}}
+                            </option>
                             <option value="true">Active</option>
                             <option value="false">InActive</option>
                         </select>
                         <!-- <div *ngIf="formSubmitted && f.active.invalid" class="error-msg">
                                 {{'helpdesk.status' | translate}} {{'helpdesk.isrequired' | translate}}
                         </div> -->
+                        <div *ngIf="createForm.controls['status'].invalid && (formSubmitted || createForm.controls['status'].touched)"
+                            class="text-danger">
+                            <span>
+                                <i class="fa fa-times"></i> Status is Required
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

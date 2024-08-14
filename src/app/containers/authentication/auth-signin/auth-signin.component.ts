@@ -239,7 +239,10 @@ export class AuthSigninComponent implements OnInit, AfterViewInit {
       finalLandingUrl = '/helpdesk/common-search/view';
     } else if (localStorage.getItem('userName').toLowerCase().trim() == 'admin') {
       finalLandingUrl = '/helpdesk/dashboard'
-    } else if (localStorage.getItem('userName') == 'nodalofficer') {
+    } else if (localStorage.getItem('userName').toLowerCase().trim() == 'prabu') {
+      finalLandingUrl = '/helpdesk/dashboard'
+    }
+    else if (localStorage.getItem('userName') == 'nodalofficer') {
       finalLandingUrl = '/helpdesk/common-search/view';
     } else if (localStorage.getItem('userName') == 'fieldadmin') {
       finalLandingUrl = '/helpdesk/reports/list';
