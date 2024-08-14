@@ -76,8 +76,8 @@ export class AddDriverDetailsComponent implements OnInit {
       district: [''],
       state: [''],
       county: [''],
-      isPermanentDriver: ['true'],
-      status: ['true'],
+      isPermanentDriver: [''],
+      status: [''],
     });
 
     // this.getuniuecode();

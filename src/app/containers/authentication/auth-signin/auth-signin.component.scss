@@ -11,3 +11,9 @@ iframe, video {
 ::-webkit-media-controls {
     display:none !important;
 }
+.auth-wrapper {
+    background-image: url('/assets/images/dc-map.jpg'); // Use ~ to specify absolute path from src directory
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
