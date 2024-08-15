@@ -1,16 +1,16 @@
 <h5 class="m-b-10 ng-star-inserted">
-    {{'helpdesk.Driver Details' | translate}}
+    Driver Details
     <button type="submit" class="btn btn-success pull-right custom_add_button" routerLink='/devar-cabs/master/driver-details/add'>
         <i class="feather icon-plus mr-2"></i>
-        {{'helpdesk.add Driver Details' | translate}}
+        Add Driver Details
     </button>
 </h5>
 
 
 <ul class="breadcrumb p-0">
     <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.Devarcabsmaster' | translate}}</a></li>
-    <li class="breadcrumb-item"><a href="javascript:">{{'helpdesk.Driver Details' | translate}}</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Devarcabsmaster</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">DriverDetails</a></li>
     <li class="breadcrumb-item">{{'helpdesk.list' | translate}}</li>
 </ul>
 <div class="row">
@@ -51,7 +51,7 @@
 
 <div class="row">
     <div class="col-xl-12">
-        <app-card cardTitle="{{'helpdesk.Driver Details list' | translate}}" blockClass="table-border-style"
+        <app-card cardTitle="Driver Details list" blockClass="table-border-style"
             class="list-panel add-panel list-search">
             <div class="table-responsive text-center" *ngIf="!searchmethod">
 
@@ -68,7 +68,7 @@
 
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                {{'helpdesk.name' | translate}}
+                                Name
 
                             </th>
                             <td mat-cell *matCellDef="let row">{{row.name}}
@@ -76,7 +76,7 @@
                         </ng-container>
                         <ng-container matColumnDef="mobileNumber">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                {{'helpdesk.mobileNumber' | translate}}
+                                Mobile Number
                             </th>
                             <td mat-cell *matCellDef="let row">{{row.mobileNumber}}
                             </td>
@@ -84,14 +84,14 @@
 
                         <ng-container matColumnDef="drivingLicenseNumber">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                {{'helpdesk.drivingLicenseNumber' | translate}}
+                                Driving License Number
                             </th>
                             <td mat-cell *matCellDef="let row">{{row.drivingLicenseNumber}}
                             </td>
                         </ng-container>
                         <ng-container matColumnDef="aadharNumber">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                {{'helpdesk.aadharNumber' | translate}}
+                                Aadhar Number
                             </th>
                             <td mat-cell *matCellDef="let row">{{row.aadharNumber}}
                             </td>
@@ -99,7 +99,7 @@
 
                         <ng-container matColumnDef="createdDate">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                {{'helpdesk.createdDate' | translate}}
+                                Created Date
                             </th>
                             <td mat-cell *matCellDef="let row">{{row.createdDate | date: 'dd-MM-yyyy HH:mm:ss'}}
                             </td>
