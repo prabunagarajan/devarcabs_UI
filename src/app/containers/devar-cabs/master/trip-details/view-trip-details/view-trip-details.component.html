@@ -1,0 +1,217 @@
+<h5 class="m-b-10 ng-star-inserted">
+    View Trip Details
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Devar Cabs</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Trip Details</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">View</a> </li>
+</ul>
+
+<div class="col-xl-12">
+    <app-card cardTitle="Trip Details" blockClass="table-border-style" class="list-panel add-panel list-search">
+        <div class="row mb-2 pb-2">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Vehicle Number<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.vehicleNumber}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Trip Date<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{ viewDetails?.date | date:'dd-MM-yyyy' }} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Customer Name<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.customerName}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Customer Mobile Number<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.customerMobileNumber}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Driver Name<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.driverName}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Start KM<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.startingKM}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Closing KM<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.closingKM}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Used KM<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.usedKM}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Start Time<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.startingTime}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Closing Time<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.closingTime}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Total HRS<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.totalTime}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Ac Type<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.acOrNonAc}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Ac Starting KM<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.acStartingKM}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Ac Closing KM<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.acClosingKM}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label"> Ac Used KM<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.usedAcKM}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Ac Remarks<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.acNote}} </span>
+            </div>
+        </div>
+    </app-card>
+</div>
+
+<div class="col-xl-12">
+    <app-card cardTitle="Payment Details" blockClass="table-border-style" class="list-panel add-panel list-search">
+        <div class="row mb-2 pb-2">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Visiting Place<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.visitingPlace}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Day Rent<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.dayRent}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Toll<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.toll}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Total Rent<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.totalRent}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Diesel<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.diesel}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Driver Payment<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.driverPayment}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Permit<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.permitAmount}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Advance Type<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.advanceType}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Advance Amount<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.advanceAmount}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Payment Type<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.paymentType}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Recived Amount<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.receivedAmount}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Pending Amount<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.pendingAmount}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Balance Amount<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.balanceAmount}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Submitted By<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.submittedBy}} </span>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <label class="w-100 view-label">Profit Amount<span class="float-right">:</span></label>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                <span> {{viewDetails?.permitAmount}} </span>
+            </div>
+        </div>
+    </app-card>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+    <div class="form-group">
+        <button type="button" class="btn btn-secondary" routerLink="/devar-cabs/master/trip-details/list">Back</button>
+
+    </div>
+
+</div>

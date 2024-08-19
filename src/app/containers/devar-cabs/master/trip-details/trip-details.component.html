@@ -1,0 +1,109 @@
+<h5 class="m-b-10 ng-star-inserted"> Trip List</h5>
+<button type="submit" class="btn btn-success pull-right custom_add_button"
+    routerLink='/devar-cabs/master/trip-details/add'>
+    <i class="feather icon-plus mr-2"></i>
+    Add Trip Details
+</button>
+
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:" [routerLink]="['/welcome']"><i class="feather icon-home"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="javascript:">
+            Trip Details
+        </a>
+    </li>
+    <li class="breadcrumb-item"><a href="javascript:"> List</a></li><!-- 
+    <li class="breadcrumb-item"> <a href="javascript:">{{'wholesale.indentrequest.list' | translate}} </a> </li>-->
+</ul>
+
+<div class="row">
+    <div [formGroup]="vehicleDetailsSearchForm" class="col-xl-12">
+        <app-card cardTitle="Search" class="search-panel">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="text" name="daterange" ngxDaterangepickerMd
+                            [locale]="{applyLabel: 'Okay', format: 'DD-MM-YYYY', separator: ' To '}"
+                            formControlName="selDate" class="form-control" [maxDate]='maxDate' autocomplete="off"
+                            placeholder="Start Date & End Date">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Trip Number
+                        </label>
+                        <select formControlName="vechileNumber" class="form-control">
+                            <option disabled value="">Select</option>
+                            <option *ngFor="let element of vehicleNumberStatusDetailsList"
+                                [value]="element.vehicleNumber">
+                                {{element.vehicleNumber}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Trip Status
+                        </label>
+                        <select formControlName="vechileStatus" class="form-control">
+                            <option disabled value="">Select</option>
+                            <option value="true">Active</option>
+                            <option value="false">In-Active</option>
+                            <!--  <option *ngFor="let element of vehicleNumberStatusDetailsList" [value]="element.status">
+                                {{ element.status ? 'Active' : 'In-Active' }}
+                            </option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                    <div class="form-group text-right">
+                        <label> &nbsp; </label> <br>
+                        <button type="submit" class="btn btn-primary mr-2" (click)="search()">Search</button>
+                        <button type="submit" class="btn btn-secondary" (click)="clearList()">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <app-card cardTitle="Trip Details list" blockClass="table-border-style" class="list-panel">
+            <ngb-tabset #tabSet="ngbTabset" type="pills" class="mb-2" (tabChange)="beforeChange($event)">
+                <ngb-tab title="All Trip List" id="all">
+                    <ng-template ngbTabContent>
+                        <div class="table-responsive">
+                            <app-mat-normal-table [columns]="vehicleDetailsColumns" [actionKeys]="actionKeys"
+                                [dataSource]="dataSource" [totalCount]="totalCount" [pageSize]="pageSize"
+                                (paginationEvent)="handlePagination($event)" (editAction)="navigateByEdit($event)"
+                                (viewAction)="navigateByView($event)">
+                                <!-- (downloadAction)="qrCodeDowenload($event)" -->
+                            </app-mat-normal-table>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab id="pending">
+                    <ng-template ngbTabTitle>Payment Pending Trip List</ng-template>
+                    <ng-template ngbTabContent>
+                        <div class="table-responsive">
+                            <app-mat-normal-table [columns]="vehicleDetailsColumns" [actionKeys]="actionKeys"
+                                [dataSource]="pendingDataSource" [totalCount]="pendingTotalCount" [pageSize]="pageSize"
+                                (paginationEvent)="pendingHandlePagination($event)" (editAction)="navigateByEdit($event)"
+                                (viewAction)="navigateByView($event)">
+                                <!-- (downloadAction)="qrCodeDowenload($event)" -->
+                            </app-mat-normal-table>
+                            <!-- (editAction)="inprogreEdit($event)" (viewAction)="inprogreView($event)" -->
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </app-card>
+    </div>
+</div>

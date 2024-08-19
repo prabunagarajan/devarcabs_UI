@@ -1,0 +1,205 @@
+<h5 *ngIf="editId == undefined" class="m-b-10 ng-star-inserted">
+    Add DriverDetails
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Devar Cabs</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Vehicle Details</a></li>
+    <li class="breadcrumb-item"><a href="javascript:"></a> Add</li>
+</ul>
+<form [formGroup]="vehicleDetailsForm" autocomplete="off">
+    <div class="col-xl-12">
+        <app-card cardTitle="Vehicle Details" blockClass="table-border-style" class="list-panel add-panel list-search">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Vehicle Number <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="vechileNumber" class="form-control" name="vechileNumber"
+                            placeholder="Enter Vehicle Number"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileNumber.errors }">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileNumber.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.vechileNumber.errors.required">Vehicle Number is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Vehicle Name <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="vechileName" class="form-control"
+                            placeholder="Enter Vehicle Name"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileName.errors }">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileName.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.vechileName.errors.required">Vehicle Name is required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Vehicle Color <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="vechileColor" class="form-control"
+                            placeholder="Enter Vehicle Color"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileColor.errors }">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileColor.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.vechileColor.errors.required">Vehicle Name is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Status<span class="text-danger">*</span></label>
+                        <select type="text" formControlName="vechileStatus" class="form-control"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileStatus.errors }"
+                            placeholder="Enter Aadhar Number">
+                            <option disabled value="">Select</option>
+                            <option value="true">Active</option>
+                            <option value="false">In-Active</option>
+                        </select>
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.vechileStatus.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.vechileStatus.errors.required">Vehicle Name is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Insurance Date<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="insuranceDate"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.insuranceDate.errors }"
+                            [locale]="{applyLabel: 'Okay', format: 'DD-MM-YYYY'}" ngxDaterangepickerMd
+                            [singleDatePicker]="true" [maxDate]="maxDate" [minDate]="minDate" autocomplete="off"
+                            readonly class="form-control" [singleDatePicker]="true" placeholder="Enter Insurance Date">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.insuranceDate.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.insuranceDate.errors.required">Vehicle Name is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Taxe Date <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="taxDate"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.taxDate.errors }"
+                            [locale]="{applyLabel: 'Okay', format: 'DD-MM-YYYY'}" ngxDaterangepickerMd
+                            [singleDatePicker]="true" [maxDate]="maxDate" [minDate]="minDate" autocomplete="off"
+                            readonly class="form-control" [singleDatePicker]="true" placeholder="Enter Taxe Date">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.taxDate.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.taxDate.errors.required">Vehicle Name is
+                                required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Fc Date<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="fcDate"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.fcDate.errors }"
+                            [locale]="{applyLabel: 'Okay', format: 'DD-MM-YYYY'}" ngxDaterangepickerMd
+                            [singleDatePicker]="true" [maxDate]="maxDate" [minDate]="minDate" autocomplete="off"
+                            readonly class="form-control" [singleDatePicker]="true" placeholder="Enter Fc Date">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.fcDate.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.fcDate.errors.required">Vehicle Name is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Polution Date (PUCC)<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="polutionDate"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.polutionDate.errors }"
+                            [locale]="{applyLabel: 'Okay', format: 'DD-MM-YYYY'}" ngxDaterangepickerMd
+                            [singleDatePicker]="true" [maxDate]="maxDate" [minDate]="minDate" autocomplete="off"
+                            readonly class="form-control" [singleDatePicker]="true"
+                            placeholder="Enter Polution Date (PUCC)">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.polutionDate.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.polutionDate.errors.required">Vehicle Name is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Remarks<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="rmearks" class="form-control"
+                            [ngClass]="{ 'is-invalid': vehicleDetailsFormSubmit && vehicleDetailsFormGet.rmearks.errors }"
+                            placeholder="Enter Remarks">
+                        <div *ngIf="vehicleDetailsFormSubmit && vehicleDetailsFormGet.rmearks.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="vehicleDetailsFormGet.rmearks.errors.required">Vehicle Name is
+                                required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </app-card>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary m-r-5" (click)="checkConfirm(vehicleDetailsForm)">Yes</button>
+            <button type="button" class="btn btn-secondary"
+                routerLink="/devar-cabs/master/vehicle-details/list">No</button>
+
+        </div>
+
+    </div>
+</form>
+
+<app-ui-modal dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success">Test</h3>
+    </div>
+</app-ui-modal>
+
+
+<app-ui-modal #vehicleDetailsPopUP dialogClass="modal-dialog-centered">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Confirm</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="vehicleDetailsPopUP.hide()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <h6 class="text-secondary text-center">Are you sure you want to SUBMIT ?</h6>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmSubmit()" [disabled]="loaderButton">
+            <i class="fa" [ngClass]="{'fa-spin fa-spinner': loaderButton, 'fa-check': !loaderButton}"></i>
+            Yes</button>
+        <button type="button" class="btn btn-secondary ml-2" data-dismiss="modal"
+            (click)="vehicleDetailsPopUP.hide()">No</button>
+    </div>
+</app-ui-modal>
