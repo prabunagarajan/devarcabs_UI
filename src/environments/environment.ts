@@ -46,7 +46,7 @@ export const environment = {
 
   Sms: 'https://testapigateway.upexciseonline.co/sms/1.0/',
   // helpdeskURL: 'https://testapigateway.upexciseonline.co/helpdesk/v1.0.0/',
-  helpdeskURL: 'http://localhost:3333/helpdesk/',
+  helpdeskURL: 'http://192.168.29.207:3333/helpdesk/',
   registerbaseurl: 'https://testapigateway.upexciseonline.co/user-managment/v1.0.0/',
   uploadBaseurl: 'https://testapigateway.upexciseonline.co/docManagement/v1.0.0/',
   retailURL: 'https://testapigateway.upexciseonline.co/retailpos/v1.0.0/',

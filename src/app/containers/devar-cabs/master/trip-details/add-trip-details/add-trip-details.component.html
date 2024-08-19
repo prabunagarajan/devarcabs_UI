@@ -1,0 +1,601 @@
+<h5 class="m-b-10 ng-star-inserted">
+    Add Trip Details
+</h5>
+<ul class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="javascript:"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Devar Cabs</a></li>
+    <li class="breadcrumb-item"><a href="javascript:">Trip Details</a></li>
+    <li class="breadcrumb-item"><a href="javascript:"></a> Add</li>
+</ul>
+<form [formGroup]="tripDetailsForm" autocomplete="off">
+
+
+    <div class="col-xl-12">
+        <app-card cardTitle="Trip Details" blockClass="table-border-style" class="list-panel add-panel list-search">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Vehicle Number <span class="text-danger">*</span></label>
+                        <select type="text" formControlName="vechileNumber" class="form-control" name="vechileNumber"
+                            placeholder="Enter Vehicle Number"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.vechileNumber.errors }">
+                            <option selected value="">Select</option>
+                            <option *ngFor="let vehicleActiveDetails of vehicleActiveDetailsList"
+                                [value]="vehicleActiveDetails.vehicleNumber">
+                                {{ vehicleActiveDetails.vehicleNumber }}
+                            </option>
+                        </select>
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.vechileNumber.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.vechileNumber.errors.required">Vehicle Number is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Trip Date<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="tripDate"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.tripDate.errors }"
+                            [locale]="{applyLabel: 'Okay', format: 'DD-MM-YYYY'}" ngxDaterangepickerMd
+                            [singleDatePicker]="true" [maxDate]="maxDate" [minDate]="minDate" autocomplete="off"
+                            readonly class="form-control" [singleDatePicker]="true" placeholder="Enter Trip Date">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.tripDate.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.tripDate.errors.required">Trip Date is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Customer Name <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="customerName" class="form-control"
+                            placeholder="Enter Customer Name"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.customerName.errors }">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.customerName.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.customerName.errors.required">Customer Name is required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Customer Mobile Number</label> <!-- <span class="text-danger">*</span> -->
+                        <input type="text" formControlName="customerMobileNumber" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.customerMobileNumber.errors }"
+                            (keypress)="onlyDigits($event)" placeholder="Enter Customer Mobile Number">
+                        <!-- <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.customerMobileNumber.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.customerMobileNumber.errors.required">Customer Mobile Number
+                                is required
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Driver Name<span class="text-danger">*</span></label>
+                        <select type="text" formControlName="driverName" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.driverName.errors }"
+                            autocomplete="off" placeholder="Enter Driver Name">
+                            <option selected value="">Selected</option>
+                            <option [value]="driverActiveDetails.name"
+                                *ngFor="let driverActiveDetails of driverActiveDetailsList">{{driverActiveDetails.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.driverName.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.driverName.errors.required">Driver Name is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Start Km<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="startKM" autocomplete="off" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.startKM.errors }"
+                            (keyup)="startKMCalculation($event.target.value)" (keypress)="onlyDigits($event)"
+                            placeholder="Enter Start Km">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.startKM.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.startKM.errors.required">Start Km is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Closing KM<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="closingKM" autocomplete="off" class="form-control"
+                            (keypress)="onlyDigits($event)"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.closingKM.errors }"
+                            (blur)="closingKMCalculation($event.target.value)" placeholder="Enter Closing KM">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.closingKM.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.closingKM.errors.required">Closing KM is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Used KM<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="usedKM" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.usedKM.errors }"
+                            disabled (keypress)="onlyDigits($event)" autocomplete="off" placeholder="Enter Used KM">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.usedKM.errors" class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.usedKM.errors.required">Used KM is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Start Time<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="startTime" [autoApply]="true"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.startTime.errors }"
+                            [timePicker]="true" readonly [locale]="{format: 'DD/MM/YYYY HH:mm:ss', firstDay: 1}"
+                            ngxDaterangepickerMd [timePickerSeconds]="true" [singleDatePicker]="true"
+                            [maxDate]="maxDate" [minDate]="minDate" autocomplete="off" [timePicker24Hour]="true"
+                            [timePickerIncrement]="1" class="form-control" placeholder="Enter Start Time">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.startTime.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.startTime.errors.required">Start Time is
+                                required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Closing Time<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="closingTime"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.closingTime.errors }"
+                            [timePicker]="true" [autoApply]="true" readonly
+                            [locale]="{format: 'DD/MM/YYYY HH:mm:ss', firstDay: 1}" ngxDaterangepickerMd
+                            [maxDate]="maxDate" [minDate]="minDate" autocomplete="off" [timePickerSeconds]="true"
+                            (change)="closingTimeCalculation()" [timePicker24Hour]="true" [timePickerIncrement]="1"
+                            class="form-control" [singleDatePicker]="true" placeholder="Enter Closing Time">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.closingTime.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.closingTime.errors.required">Closing Time is
+                                required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Total HRS<span class="text-danger">*</span></label>
+                        <input type="text" disabled formControlName="totalHRS" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.totalHRS.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" placeholder="Enter Total HRS">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.totalHRS.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.totalHRS.errors.required">Total HRS is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>AC Type <span *ngIf="isShowActive" class="text-danger">*</span></label>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" formControlName="acType" id="customswitch1"
+                                class="custom-control-input"
+                                [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.acType.errors }"
+                                (change)="clickAcOrNonAc($event.target.checked)">
+                            <label class="custom-control-label" for="customswitch1">
+                                {{ isShowActive ? 'AC' : 'Non-AC' }}
+                            </label>
+                            <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.acType.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="tripDetailsFormGet.acType.errors.required">AC Type is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="isShowActive">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>AC Start KM<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="acStartKM"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.acStartKM.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" class="form-control"
+                            placeholder="Enter AC Start KM">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.acStartKM.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.acStartKM.errors.required">AC Start KM is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div *ngIf="isShowActive" class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>AC Closing KM<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="acClosingKM" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.acClosingKM.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" placeholder="Enter AC Closing KM">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.acClosingKM.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.acClosingKM.errors.required">AC Closing KM is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div *ngIf="isShowActive" class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>AC Used KM<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="acUsedKM" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.acUsedKM.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" placeholder="Enter AC Used KM">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.acUsedKM.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.acUsedKM.errors.required">AC Used KM is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="isShowActive" class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>AC Remarks<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="acRemarks"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.acRemarks.errors }"
+                            autocomplete="off" class="form-control" placeholder="Enter AC Remarks">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.acRemarks.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.acRemarks.errors.required">AC Remarks is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </app-card>
+    </div>
+
+
+    <div class="col-xl-12">
+        <app-card cardTitle="Payment Details" blockClass="table-border-style" class="list-panel add-panel list-search">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Visiting Place<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="visitingPlace" class="form-control" name="visitingPlace"
+                            placeholder="Enter Visiting Place"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.visitingPlace.errors }">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.visitingPlace.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.visitingPlace.errors.required">Visiting Place is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Day Rent</label>
+                        <input type="text" formControlName="dayRent"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.dayRent.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" class="form-control"
+                            placeholder="Enter Day Rent">
+                        <!-- <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.dayRent.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.dayRent.errors.required">Day Rent is
+                                required
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Toll</label>
+                        <input type="text" formControlName="toll" class="form-control" placeholder="Enter Toll"
+                            (keypress)="onlyDigits($event)"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.toll.errors }">
+                        <!-- <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.toll.errors" class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.toll.errors.required">Toll is required
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Total Rent<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="totalRent" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.totalRent.errors }"
+                            (keyup)="totalPendingAndBalanceAmtCalculation()" (keypress)="onlyDigits($event)"
+                            placeholder="Enter Customer Total Rent">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.totalRent.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.totalRent.errors.required">Customer Total Rent is
+                                required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Diesel<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="diesel" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.diesel.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" placeholder="Enter Diseal Name">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.diesel.errors" class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.diesel.errors.required">Diseal Name is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Driver Payment</label>
+                        <input type="text" formControlName="driverPayment" autocomplete="off" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.driverPayment.errors }"
+                            (keypress)="onlyDigits($event)" placeholder="Enter Driver Payment">
+                        <!-- <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.driverPayment.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.driverPayment.errors.required">Driver Payment is
+                                required
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Permit</label>
+                        <input type="text" formControlName="permit" autocomplete="off" class="form-control"
+                            (keypress)="onlyDigits($event)"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.permit.errors }"
+                            placeholder="Enter Permit">
+                        <!-- <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.permit.errors" class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.permit.errors.required">Permit is
+                                required
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Advance Type<span class="text-danger">*</span></label>
+                        <select type="text" formControlName="advanceType" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.advanceType.errors }"
+                            autocomplete="off" placeholder="Enter Advance Type">
+                            <option selected value="">Select</option>
+                            <option value="Diseal">Diseal</option>
+                            <option value="Hand">Hand</option>
+                            <option value="No-Advance">No-Advance</option>
+                        </select>
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.advanceType.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.advanceType.errors.required">Advance Type is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Advance Amount<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="advanceAmount"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.advanceAmount.errors }"
+                            (keyup)="advancePendingAndBalanceAmtCalculation()" (keypress)="onlyDigits($event)"
+                            autocomplete="off" class="form-control" placeholder="Enter Advance Amount">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.advanceAmount.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.advanceAmount.errors.required">Advance Amount is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Payment Type<span class="text-danger">*</span></label>
+                        <select type="text" formControlName="paymentType"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.paymentType.errors }"
+                            autocomplete="off" class="form-control" placeholder="Enter Payment Type">
+                            <option selected value="">Select</option>
+                            <option value="Account">Account</option>
+                            <option value="Hand">Hand</option>
+                        </select>
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.paymentType.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.paymentType.errors.required">Payment Type is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Recived Amount<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="recivedAmount" class="form-control"
+                            (keyup)="pendingAndBalanceAmtCalculation()"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.recivedAmount.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" placeholder="Enter Recived Amount">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.recivedAmount.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.recivedAmount.errors.required">Recived Amount is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Pending Amount <span class="text-danger">*</span> </label>
+                        <div class="form-group">
+                            <input type="text" disabled formControlName="pendingAmount" class="form-control"
+                                [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.pendingAmount.errors }"
+                                (keypress)="onlyDigits($event)" placeholder="Enter Pending Amount">
+                            <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.pendingAmount.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="tripDetailsFormGet.pendingAmount.errors.required">Pending Amount is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Balance Amount<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="balanceAmount"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.balanceAmount.errors }"
+                            disabled (keypress)="onlyDigits($event)" autocomplete="off" class="form-control"
+                            placeholder="Enter Balance Amount">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.balanceAmount.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.balanceAmount.errors.required">Balance Amount is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Submitted By<span class="text-danger">*</span></label>
+                        <input type="text" formControlName="submittedBy" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.submittedBy.errors }"
+                            autocomplete="off" placeholder="Enter Submitted By">
+                        <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.submittedBy.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.submittedBy.errors.required">Submitted By is
+                                required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Profit Amount</label>
+                        <input type="text" formControlName="tripProfit" class="form-control"
+                            [ngClass]="{ 'is-invalid': tripDetailsFormSubmit && tripDetailsFormGet.tripProfit.errors }"
+                            (keypress)="onlyDigits($event)" autocomplete="off" placeholder="Enter Trip Profit">
+                        <!-- <div *ngIf="tripDetailsFormSubmit && tripDetailsFormGet.tripProfit.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="tripDetailsFormGet.tripProfit.errors.required">Trip Profit is
+                                required
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+
+
+        </app-card>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary m-r-5" (click)="checkConfirm(tripDetailsForm)">Submit</button>
+            <button type="button" class="btn btn-secondary"
+                routerLink="/devar-cabs/master/trip-details/list">Back</button>
+
+        </div>
+
+    </div>
+</form>
+
+<app-ui-modal dialogClass="modal-dialog-centered success_popup">
+    <div class="app-modal-body text-center">
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+        <img src="assets/images/check.png" />
+        <h3 class="text-success">Test</h3>
+    </div>
+</app-ui-modal>
+
+
+<app-ui-modal #tripDetailsPopUP dialogClass="modal-dialog-centered">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Confirm</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+            (click)="tripDetailsPopUP.hide()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <h6 class="text-secondary text-center">Are you sure you want to SUBMIT ?</h6>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmSubmit()" [disabled]="loaderButton">
+            <i class="fa" [ngClass]="{'fa-spin fa-spinner': loaderButton, 'fa-check': !loaderButton}"></i>
+            Yes</button>
+        <button type="button" class="btn btn-secondary ml-2" data-dismiss="modal"
+            (click)="tripDetailsPopUP.hide()">No</button>
+    </div>
+</app-ui-modal>
